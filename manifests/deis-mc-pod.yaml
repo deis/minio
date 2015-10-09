@@ -1,0 +1,17 @@
+# A debugging utility for testing Minio from within k8s.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deis-mc
+  labels:
+    heritage: deis
+    version: 2015-sept
+spec:
+  restartPolicy: Never
+  containers:
+    - name: mc
+      imagePullPolicy: Always
+      image: 192.168.99.100:5000/deis/minio-mc:latest
+      command:
+        - sleep
+        - "90000"

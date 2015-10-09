@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deis-minio-rc
+  labels:
+    heritage: deis
+    release: 0.0.1-20151009142807
+spec:
+  replicas: 1
+  selector:
+    app: deis-minio
+  template:
+    metadata:
+      labels:
+        # Important: these labels need to match the selector above
+        app: deis-minio
+    spec:
+      containers:
+        - name: deis-minio
+          image: 192.168.99.100:5000/deis/minio:0.0.1-20151009142807
+          ports:
+            - containerPort: 9000
