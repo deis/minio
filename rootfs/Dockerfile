@@ -10,4 +10,6 @@ RUN apt-get update -y && apt-get install -y -q \
 
 COPY . /
 
+USER minio
+RUN mkdir /home/minio/.minio
 CMD ["/bin/minio", "server"]

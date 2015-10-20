@@ -12,10 +12,10 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
+SEC := manifests/deis-${SHORT_NAME}-secret.yaml
 IMAGE := ${DEIS_REGISTRY}/deis/${SHORT_NAME}:${VERSION}
 
-all:
-	@echo "Use a Makefile to control top-level building of the project."
+all: build docker-build docker-push
 
 build:
 	mkdir -p ${BINDIR}/bin
@@ -38,11 +38,14 @@ deploy: kube-service kube-rc
 kube-rc:
 	kubectl create -f ${RC}
 
-kube-service:
-	kubectl create -f ${SVC}
+kube-secrets:
+	- kubectl create -f ${SEC}
+
+kube-service: kube-secrets
+	- kubectl create -f ${SVC}
 
 kube-clean:
-	kubectl delete rc deis-${SHORT_NAME}-rc
+	- kubectl delete rc deis-${SHORT_NAME}-rc
 
 kube-mc:
 	kubectl create -f manifests/deis-mc-pod.yaml

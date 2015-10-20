@@ -4,7 +4,7 @@ metadata:
   name: deis-minio-rc
   labels:
     heritage: deis
-    release: 0.0.1-20151009142807
+    release: 0.0.1-20151012121243
 spec:
   replicas: 1
   selector:
@@ -17,6 +17,20 @@ spec:
     spec:
       containers:
         - name: deis-minio
-          image: 192.168.99.100:5000/deis/minio:0.0.1-20151009142807
+          image: 192.168.99.100:5000/deis/minio:0.0.1-20151012121243
           ports:
             - containerPort: 9000
+          volumeMounts:
+            - name: minio-admin
+              mountPath: /var/run/secrets/deis/minio/admin
+              readOnly: true
+            - name: minio-user
+              mountPath: /var/run/secrets/deis/minio/user
+              readOnly: true
+      volumes:
+        - name: minio-admin
+          secret:
+            secretName: minio-admin
+        - name: minio-user
+          secret:
+            secretName: minio-user
