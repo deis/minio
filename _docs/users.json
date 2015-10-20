@@ -1,0 +1,15 @@
+{
+	"Version": "0.0.1",
+	"Users": {
+		"admin": {
+			"name": "admin",
+			"accessKeyId": "admin",
+			"secretAccessKey": "pdG8Rpw0h8QtxybHsMHlkJtzJzZ2sC7b2cFBEgn+"
+		},
+		"user": {
+			"name": "user",
+			"accessKeyId": "8TZRY2JRWMPT6UMXR6I5",
+			"secretAccessKey": "gbstrOvotMMcg2sMfGUhA5a6Et/EI5ALtIHsobYk"
+		}
+	}
+}
