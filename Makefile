@@ -12,7 +12,11 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
+<<<<<<< 96acc9aed140bcf5522c9fad23036fd68faa81c3
 SEC := manifests/deis-${SHORT_NAME}-secret.yaml
+=======
+SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
+>>>>>>> feat(minio): add starter program for minio
 IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
@@ -40,8 +44,14 @@ kube-rc: kube-service
 kube-secrets:
 	- kubectl create -f ${SEC}
 
+secrets:
+	perl -pi -e "s|access-key-id: .+|access-key-id: ${key}|g" ${SEC}
+	perl -pi -e "s|access-secret-key: .+|access-secret-key: ${secret}|g" ${SEC}
+	echo ${key} ${secret}
+
 kube-service: kube-secrets
 	- kubectl create -f ${SVC}
+	- kubectl create -f manifests/deis-minio-secretUser.yaml
 
 kube-clean:
 	- kubectl delete rc deis-${SHORT_NAME}-rc

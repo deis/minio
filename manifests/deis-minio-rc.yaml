@@ -4,7 +4,7 @@ metadata:
   name: deis-minio-rc
   labels:
     heritage: deis
-    release: 0.0.1-20151012121243
+    release: 0.0.1-20151028155016
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: deis-minio
-          image: smothiki/minio:v3.2.1
+          image: smothiki/minio:0.0.1-20151028155016
           ports:
             - containerPort: 9000
           command:
