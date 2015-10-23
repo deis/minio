@@ -1,7 +1,8 @@
-FROM ubuntu-debootstrap:14.04
+FROM golang:1.5
 
-RUN apt-get update -y && apt-get install -y -q curl
-RUN curl -f -SL https://dl.minio.io:9000/updates/2015/Sept/linux-amd64/mc -o /usr/bin/mc && \
-    chmod 755 /usr/bin/mc
-
-CMD "sleep 90000"
+WORKDIR /go/src/github.com/minio
+RUN git clone https://github.com/minio/minio
+WORKDIR /go/src/github.com/minio/minio
+ENV GOPATH /go
+ENV GOROOT /usr/local/go
+RUN make install

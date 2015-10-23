@@ -17,9 +17,13 @@ spec:
     spec:
       containers:
         - name: deis-minio
-          image: 192.168.99.100:5000/deis/minio:0.0.1-20151012121243
+          image: smothiki/minio:v3.2.1
           ports:
             - containerPort: 9000
+          command:
+            - boot
+          args:
+            - "server /home/minio/"
           volumeMounts:
             - name: minio-admin
               mountPath: /var/run/secrets/deis/minio/admin

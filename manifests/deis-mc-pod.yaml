@@ -11,7 +11,8 @@ spec:
   containers:
     - name: mc
       imagePullPolicy: Always
-      image: 192.168.99.100:5000/deis/minio-mc:latest
+      image: smothiki/minio:v2
       command:
-        - sleep
-        - "90000"
+        - mc
+      args:
+        - "mode memory limit 512MB"

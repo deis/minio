@@ -13,17 +13,17 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
 SEC := manifests/deis-${SHORT_NAME}-secret.yaml
-IMAGE := ${DEIS_REGISTRY}/deis/${SHORT_NAME}:${VERSION}
+IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
 
 build:
-	mkdir -p ${BINDIR}/bin
-	docker build --rm -t deis/minio-builder:0 .
-	sleep 3
-	docker cp $(shell docker run -d -v rootfs/bin:/app -w /go/src/github.com/minio/minio deis/minio-builder:0 sleep 20):/go/bin/minio rootfs/bin
+	mkdir -p ${BINDIR}
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
 docker-build:
+	docker build -t minio mc
+	docker cp `docker run -d minio`:/go/bin/minio $(BINDIR)
 	docker build --rm -t ${IMAGE} rootfs
 	# These are both YAML specific
 	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/${SHORT_NAME}:[0-9a-z-.]+|image: ${IMAGE}|g" ${RC}
@@ -32,10 +32,9 @@ docker-build:
 docker-push:
 	docker push ${IMAGE}
 
-deploy: kube-service kube-rc
-	kubectl create -f ${SVC}
+deploy: build docker-build docker-push kube-rc
 
-kube-rc:
+kube-rc: kube-service
 	kubectl create -f ${RC}
 
 kube-secrets:
@@ -54,6 +53,5 @@ mc:
 	docker build -t ${DEIS_REGISTRY}/deis/minio-mc:latest mc
 	docker push ${DEIS_REGISTRY}/deis/minio-mc:latest
 	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-pod.yaml
-
 
 .PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc
