@@ -112,11 +112,7 @@ func main() {
 	output, err := os.Create(configdir + "config.json")
 	err = t.Execute(output, secrets)
 	checkError(err)
-<<<<<<< 96acc9aed140bcf5522c9fad23036fd68faa81c3
-	os.Args[0] = "/usr/bin/minio"
-=======
 	os.Args[0] = "minio"
->>>>>>> feat(minio): add starter program for minio
 	mc := strings.Join(os.Args, " ")
 	run(mc)
 }
