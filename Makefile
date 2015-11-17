@@ -12,11 +12,7 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
-<<<<<<< 96acc9aed140bcf5522c9fad23036fd68faa81c3
-SEC := manifests/deis-${SHORT_NAME}-secret.yaml
-=======
 SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
->>>>>>> feat(minio): add starter program for minio
 IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
