@@ -7,23 +7,19 @@ export GO15VENDOREXPERIMENT=1
 VERSION := 0.0.1-$(shell date "+%Y%m%d%H%M%S")
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
-DEV_REGISTRY ?= $(eval docker-machine ip deis):5000
+DEV_REGISTRY ?= $(docker-machine ip deis):5000
 DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
-<<<<<<< 96acc9aed140bcf5522c9fad23036fd68faa81c3
-SEC := manifests/deis-${SHORT_NAME}-secret.yaml
-=======
 SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
->>>>>>> feat(minio): add starter program for minio
 IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
 
 build:
 	mkdir -p ${BINDIR}
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
 docker-build:
 	docker build -t minio mc
