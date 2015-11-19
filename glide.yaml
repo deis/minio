@@ -1,12 +1,10 @@
 package: main
 import:
-- package: gopkg.in
-  subpackages:
-  - /natefinch/lumberjack.v2
-  - /olivere/elastic.v2
-  - /tomb.v1
-  - /v2/yaml
-  - /yaml.v2
+- package: gopkg.in/natefinch/lumberjack.v2
+- package: gopkg.in/olivere/elastic.v2
+- package: gopkg.in/tomb.v1
+- package: gopkg.in/v2/yaml
+- package: gopkg.in/yaml.v2
 - package: github.com/deis/pkg/aboutme
 - package: github.com/deis/deis
 - package: code.google.com/p/protobuf
