@@ -9,7 +9,4 @@ import:
   - /yaml.v2
 - package: github.com/deis/pkg/aboutme
 - package: github.com/deis/deis
-- package: k8s.io/kubernetes
-  subpackages:
-  - .
-  - /pkg/api
+- package: code.google.com/p/protobuf
