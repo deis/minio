@@ -6,5 +6,4 @@ import:
 - package: gopkg.in/v2/yaml
 - package: gopkg.in/yaml.v2
 - package: github.com/deis/pkg/aboutme
-- package: github.com/deis/deis
 - package: code.google.com/p/protobuf
