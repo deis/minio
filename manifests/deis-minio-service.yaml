@@ -7,8 +7,10 @@ metadata:
     heritage: deis
     release: 0.0.0
 spec:
+  type: NodePort
   ports:
     - port: 9000
+      nodePort: 32760
       targetPort: 9000
       name: s3
       protocol: TCP
