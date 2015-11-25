@@ -18,7 +18,7 @@ IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
 all: build docker-build docker-push
 
 bootstrap:
-	glide -y glide.yaml up
+	glide up
 
 build:
 	mkdir -p ${BINDIR}
