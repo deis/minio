@@ -1,0 +1,16 @@
+package: main
+import:
+- package: gopkg.in/natefinch/lumberjack.v2
+  version: 600ceb4523e5b7ff745f91083c8a023c2bf73af5
+- package: gopkg.in/olivere/elastic.v2
+  version: 444684342d4c12c7c05bed13bd249034370840a9
+- package: gopkg.in/tomb.v1
+  version: dd632973f1e7218eb1089048e0798ec9ae7dceb8
+- package: gopkg.in/v2/yaml
+  version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
+- package: gopkg.in/yaml.v2
+  version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
+- package: github.com/deis/pkg/aboutme
+  version: f63d9718b86f17c9320f838fb3eb6039cadb9691
+- package: github.com/google/protobuf
+  version: b640f216a56ae25aab9a1fc6f21aa1a56c304494

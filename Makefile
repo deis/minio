@@ -17,6 +17,9 @@ IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
 
+bootstrap:
+	glide up
+
 build:
 	mkdir -p ${BINDIR}
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1

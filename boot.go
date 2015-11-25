@@ -10,10 +10,11 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/deis/deis/pkg/aboutme"
-	"github.com/deis/deis/tests/utils"
+	"github.com/deis/pkg/aboutme"
+	"github.com/deis/pkg/utils"
 )
 
+// Secret is a secret for the remote object storage
 type Secret struct {
 	Host      string
 	KeyID     string
