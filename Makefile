@@ -7,7 +7,7 @@ export GO15VENDOREXPERIMENT=1
 VERSION := 0.0.1-$(shell date "+%Y%m%d%H%M%S")
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
-DEV_REGISTRY ?= $(eval docker-machine ip deis):5000
+DEV_REGISTRY ?= $(docker-machine ip deis):5000
 DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
