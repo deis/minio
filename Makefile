@@ -13,7 +13,7 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
 SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
-IMAGE := ${DEIS_REGISTRY}/${SHORT_NAME}:${VERSION}
+IMAGE := ${DEIS_REGISTRY}/${IMAGE_PREFIX}${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
 
@@ -25,14 +25,17 @@ build:
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
 docker-build:
+	# build the minio server
 	docker build -t minio mc
 	docker cp `docker run -d minio`:/go/bin/minio $(BINDIR)
+
+	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
 	# These are both YAML specific
 	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/${SHORT_NAME}:[0-9a-z-.]+|image: ${IMAGE}|g" ${RC}
 	perl -pi -e "s|release: [a-zA-Z0-9.+_-]+|release: ${VERSION}|g" ${RC}
 
-docker-push:
+docker-push: docker-build
 	docker push ${IMAGE}
 
 deploy: build docker-build docker-push kube-rc
