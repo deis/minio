@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: deis-minio-rc
+  name: deis-minio
   labels:
     heritage: deis
-    release: 0.0.1-20151028155016
+    release: 0.0.1-20151125145149
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: deis-minio
-          image: smothiki/minio:0.0.1-20151028155016
+          image: quay.io/deis/minio
           ports:
             - containerPort: 9000
           command:
