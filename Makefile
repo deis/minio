@@ -35,7 +35,7 @@ docker-build:
 	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/${SHORT_NAME}:[0-9a-z-.]+|image: ${IMAGE}|g" ${RC}
 	perl -pi -e "s|release: [a-zA-Z0-9.+_-]+|release: ${VERSION}|g" ${RC}
 
-docker-push:
+docker-push: docker-build
 	docker push ${IMAGE}
 
 deploy: build docker-build docker-push kube-rc
