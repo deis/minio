@@ -13,7 +13,7 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
 SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
-IMAGE := ${DEIS_REGISTRY}/${IMAGE_PREFIX}${SHORT_NAME}:${VERSION}
+IMAGE := ${DEIS_REGISTRY}/${IMAGE_PREFIX}/${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
 
