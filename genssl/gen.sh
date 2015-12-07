@@ -1,7 +1,11 @@
-# this script intended to be run inside alpine linux. see the "ssl-cert" build target in the Makefile (one directory above)
+# this script intended to be run inside an alpine:3.2 Docker container, inside a /bin/ash shell.
+# it expects that its parent directory is a volume mounted at /pwd and its current working directory is /pwd also
 
 apk add --update-cache openssl
 rm -rf /var/cache/apk/*
+
+mkdir -p ./rootfs/certs
+cd ./rootfs/certs
 
 openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
 openssl rsa -passin pass:x -in server.pass.key -out server.key
