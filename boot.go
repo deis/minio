@@ -103,7 +103,7 @@ func main() {
 			AccessKey: access,
 		},
 	}
-	t := template.New("Secret template")
+	t := template.New("MinioTpl")
 
 	t, err = t.Parse(templv2)
 
