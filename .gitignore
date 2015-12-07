@@ -1,3 +1,6 @@
 rootfs/bin/minio
 rootfs/bin/boot
 vendor/
+genssl/server.crt
+genssl/server.csr
+genssl/server.key

@@ -41,6 +41,9 @@ docker-push: docker-build
 
 deploy: build docker-build docker-push kube-rc
 
+ssl-cert:
+	docker run --rm -v "${PWD}/genssl":/ssl -w /ssl alpine:3.1 /bin/ash gen.sh
+
 kube-rc: kube-service
 	kubectl create -f ${RC}
 
