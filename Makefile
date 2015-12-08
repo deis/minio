@@ -56,6 +56,12 @@ kube-rc: kube-service
 kube-secrets: ssl-cert
 	kubectl create -f ${ADMIN_SEC}
 	kubectl create -f ${USER_SEC}
+	kubectl create -f ${SSL_SEC}
+
+kube-clean-secrets:
+	kubectl delete secret minio-user
+	kubectl delete secret minio-admin
+	kubectl delete secret minio-ssl
 
 kube-service: kube-secrets
 	- kubectl create -f ${SVC}
