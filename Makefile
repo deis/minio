@@ -14,6 +14,7 @@ RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
 ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
 USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
+SSL_SEC := manifests/deis-${SHORT_NAME}-secretssl-final.yaml
 IMAGE := ${DEIS_REGISTRY}${SHORT_NAME}:${VERSION}
 MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
 MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
@@ -52,7 +53,7 @@ ssl-cert:
 kube-rc: kube-service
 	kubectl create -f ${RC}
 
-kube-secrets:
+kube-secrets: ssl-cert
 	kubectl create -f ${ADMIN_SEC}
 	kubectl create -f ${USER_SEC}
 
