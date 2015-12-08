@@ -23,9 +23,9 @@ spec:
           command:
             - boot
           args:
-            - "server"
             - "--cert=/var/run/secrets/deis/minio/ssl/access-cert"
             - "--key=/var/run/secrets/deis/minio/ssl/access-pem"
+            - "server"
             - "/home/minio/"
           volumeMounts:
             - name: minio-admin
