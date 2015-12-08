@@ -50,7 +50,7 @@ ssl-cert:
 	# generate ssl certs
 	docker run --rm -v "${PWD}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
 	# replace values in ssl secrets file
-	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 ./genssl/manifest_replace.sh
+	docker run --rm -v "${PWD}":/pwd -w /pwd golang:1.5.1-alpine go run ./genssl/manifest_replace.go --cert=./genssl/server.cert --key=./genssl/server.key --tpl=./manifests/deis-minio-secretssl-tpl.yaml --out=./manifests/deis-minio-secretssl-final.yaml
 
 kube-rc:
 	kubectl create -f ${RC}
