@@ -6,7 +6,7 @@ ENV GOPATH /go
 ENV GOROOT /usr/local/go
 
 RUN mkdir -p ${GOPATH}/bin
-ENV PATH=/usr/local/go/bin:{$GOPATH}/bin:$PATH
+ENV PATH=${GOROOT}/bin:${GOPATH}/bin:$PATH
 
 RUN mkdir -p ${GOPATH}/src/github.com/minio
 WORKDIR ${GOPATH}/src/github.com/minio
