@@ -66,6 +66,7 @@ kube-mc:
 	kubectl create -f manifests/deis-mc-pod.yaml
 
 mc:
+	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
 	docker build -t ${MC_IMAGE} mc
 	docker push ${MC_IMAGE}
 	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-pod.yaml
