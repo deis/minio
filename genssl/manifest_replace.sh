@@ -3,9 +3,9 @@
 # finally, it also expects that a 'server.cert' and 'server.pem' in ./genssl. it uses those as the SSL cert and PEM files, respectively
 
 FILE_CONTENTS="$(cat ./manifests/deis-minio-secretssl.yaml)"
-CERT=`base64 ./genssl/server.cert`
-PEM=`base64 ./genssl/server.pem`
+CERT="$(base64 ./genssl/server.cert)"
+PEM="$(base64 ./genssl/server.pem)"
 
 FILE_CONTENTS="${FILE_CONTENTS/ACCESS_CERT/$CERT}"
 FILE_CONTENTS="${FILE_CONTENTS/ACCESS_PEM/$PEM}"
-echo $FILE_CONTENTS > ./manifests/deis-minio-secretssl-final.yaml
+echo "$FILE_CONTENTS" > ./manifests/deis-minio-secretssl-final.yaml
