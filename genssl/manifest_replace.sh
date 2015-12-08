@@ -1,3 +1,4 @@
+#!/bin/ash
 # this script intended to be run inside an alpine:3.2 Docker container, inside a /bin/ash shell.
 # it expects that its parent directory (minio/) is mounted to this container and also is its current working directory.
 # finally, it also expects that a 'server.cert' and 'server.key' in ./genssl. it uses those as the SSL cert and private key (AKA .pem) files, respectively

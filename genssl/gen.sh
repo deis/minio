@@ -1,8 +1,7 @@
-# this script intended to be run inside an alpine:3.2 Docker container, inside a /bin/ash shell.
-# it expects that its parent directory (minio/) is mounted to this container and also is its current working directory.
+#!/bin/sh
 
-apk add --update-cache openssl
-rm -rf /var/cache/apk/*
+# this script intended to be run inside a centurylink/openssl:0.0.1 Docker container.
+# it expects that its parent directory (minio/) is mounted to this container and also is its current working directory.
 
 # these commands are adapted from the very clear and extensive Heroku documents on creating a self-signed SSL certificate: https://devcenter.heroku.com/articles/ssl-certificate-self#generate-private-key-and-certificate-signing-request
 

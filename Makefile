@@ -45,9 +45,9 @@ deploy: build docker-build docker-push kube-rc
 
 ssl-cert:
 	# generate ssl certs
-	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 /bin/ash ./genssl/gen.sh && ./genssl/manifest-replace.sh
+	docker run --rm -v "${PWD}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
 	# replace values in ssl secrets file
-	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 /bin/ash ./genssl/manifest_replace.sh
+	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 ./genssl/manifest_replace.sh
 
 kube-rc: kube-service
 	kubectl create -f ${RC}
