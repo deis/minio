@@ -13,5 +13,4 @@ spec:
       name: s3
       protocol: TCP
   selector:
-    # Match the selector in the RC
     app: deis-minio

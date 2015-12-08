@@ -12,8 +12,9 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
-SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
-IMAGE := ${DEIS_REGISTRY}/${IMAGE_PREFIX}/${SHORT_NAME}:${VERSION}
+ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
+USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
+IMAGE := ${DEIS_REGISTRY}${SHORT_NAME}:${VERSION}
 
 all: build docker-build docker-push
 
@@ -44,12 +45,8 @@ kube-rc: kube-service
 	kubectl create -f ${RC}
 
 kube-secrets:
-	- kubectl create -f ${SEC}
-
-secrets:
-	perl -pi -e "s|access-key-id: .+|access-key-id: ${key}|g" ${SEC}
-	perl -pi -e "s|access-secret-key: .+|access-secret-key: ${secret}|g" ${SEC}
-	echo ${key} ${secret}
+	kubectl create -f ${ADMIN_SEC}
+	kubectl create -f ${USER_SEC}
 
 kube-service: kube-secrets
 	- kubectl create -f ${SVC}
