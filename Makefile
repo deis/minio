@@ -52,7 +52,7 @@ ssl-cert:
 	# replace values in ssl secrets file
 	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 ./genssl/manifest_replace.sh
 
-kube-rc: kube-service
+kube-rc:
 	kubectl create -f ${RC}
 
 kube-secrets: ssl-cert
