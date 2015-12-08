@@ -4,7 +4,7 @@ export GO15VENDOREXPERIMENT=1
 
 # Note that Minio currently uses CGO.
 
-VERSION := 0.0.1-$(shell date "+%Y%m%d%H%M%S")
+VERSION ?= 0.0.1-$(shell date "+%Y%m%d%H%M%S")
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
 DEV_REGISTRY ?= $(docker-machine ip deis):5000
@@ -15,6 +15,7 @@ SVC := manifests/deis-${SHORT_NAME}-service.yaml
 ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
 USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
 IMAGE := ${DEIS_REGISTRY}${SHORT_NAME}:${VERSION}
+MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
 
 all: build docker-build docker-push
 
@@ -65,8 +66,8 @@ kube-mc:
 	kubectl create -f manifests/deis-mc-pod.yaml
 
 mc:
-	docker build -t ${DEIS_REGISTRY}/deis/minio-mc:latest mc
-	docker push ${DEIS_REGISTRY}/deis/minio-mc:latest
+	docker build -t ${MC_IMAGE} mc
+	docker push ${MC_IMAGE}
 	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-pod.yaml
 
 .PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc
