@@ -5,7 +5,7 @@ metadata:
   name: deis-mc
   labels:
     heritage: deis
-    version: 2015-sept
+    version: v2-alpha
 spec:
   restartPolicy: Never
   containers:
