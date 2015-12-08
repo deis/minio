@@ -46,6 +46,8 @@ docker-push: docker-build
 
 deploy: build docker-build docker-push kube-rc
 
+# TODO: would be nice to refactor all of this code into a single binary. 1/2 of it is already written in genssl/manifest_replace.go.
+# the other 1/2 is in gen.sh, and should be refactored as a few 'exec.Command' calls...
 ssl-cert:
 	# generate ssl certs
 	docker run --rm -v "${PWD}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
