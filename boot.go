@@ -115,6 +115,7 @@ func main() {
 	checkError(err)
 	os.Args[0] = "minio"
 	mc := strings.Join(os.Args, " ")
+	fmt.Println(mc)
 	run(mc)
 }
 
