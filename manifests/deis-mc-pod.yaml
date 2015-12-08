@@ -11,7 +11,7 @@ spec:
   containers:
     - name: mc
       imagePullPolicy: Always
-      image: smothiki/minio:v2
+      image: quay.io/deisci/mc:v2-alpha
       command:
         - mc
       args:
