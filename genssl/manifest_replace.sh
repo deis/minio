@@ -3,10 +3,12 @@
 # it expects that its parent directory (minio/) is mounted to this container and also is its current working directory.
 # finally, it also expects that a 'server.cert' and 'server.key' in ./genssl. it uses those as the SSL cert and private key (AKA .pem) files, respectively
 
-FILE_CONTENTS="$(cat ./manifests/deis-minio-secretssl.yaml)"
-CERT="$(base64 ./genssl/server.cert)"
-PEM="$(base64 ./genssl/server.key)"
+CERT=$(base64 ./genssl/server.cert | tr -d '\n')
+PEM=$(base64 ./genssl/server.key | tr -d '\n')
 
-FILE_CONTENTS="${FILE_CONTENTS/ACCESS_CERT/$CERT}"
-FILE_CONTENTS="${FILE_CONTENTS/ACCESS_PEM/$PEM}"
-echo "$FILE_CONTENTS" > ./manifests/deis-minio-secretssl-final.yaml
+FINAL_FILE=./manifests/deis-minio-secretssl-final.yaml
+
+FILE_CONTENTS=$(sed -e "s/ACCESS_CERT/$CERT/" ./manifests/deis-minio-secretssl.yaml)
+echo "$FILE_CONTENTS" > $FINAL_FILE
+FILE_CONTENTS=$(sed -e "s/ACCESS_PEM/$PEM/" $FINAL_FILE)
+echo "$FILE_CONTENTS" > $FINAL_FILE
