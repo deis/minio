@@ -101,4 +101,7 @@ docker-push-mc-integration:
 	docker push ${MC_INTEGRATION_IMAGE}
 	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_INTEGRATION_IMAGE}/|g" manifests/deis-mc-integration-pod.yaml
 
+test:
+	@echo "Implement functional tests in _tests directory"
+
 .PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc
