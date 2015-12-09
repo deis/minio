@@ -4,7 +4,7 @@ export GO15VENDOREXPERIMENT=1
 
 # Note that Minio currently uses CGO.
 
-VERSION := 0.0.1-$(shell date "+%Y%m%d%H%M%S")
+VERSION ?= 0.0.1-$(shell date "+%Y%m%d%H%M%S")
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
 DEV_REGISTRY ?= $(docker-machine ip deis):5000
@@ -15,6 +15,8 @@ SVC := manifests/deis-${SHORT_NAME}-service.yaml
 ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
 USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
 IMAGE := ${DEIS_REGISTRY}${SHORT_NAME}:${VERSION}
+MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
+MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
 
 all: build docker-build docker-push
 
@@ -64,9 +66,24 @@ kube-clean:
 kube-mc:
 	kubectl create -f manifests/deis-mc-pod.yaml
 
-mc:
-	docker build -t ${DEIS_REGISTRY}/deis/minio-mc:latest mc
-	docker push ${DEIS_REGISTRY}/deis/minio-mc:latest
-	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-pod.yaml
+kube-mc-integration:
+	kubectl create -f manifests/deis-mc-integration-pod.yaml
+
+build-mc:
+	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
+
+docker-build-mc:
+	docker build -t ${MC_IMAGE} mc
+
+docker-push-mc:
+	docker push ${MC_IMAGE}
+	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_IMAGE}/|g" manifests/deis-mc-pod.yaml
+
+docker-build-mc-integration:
+	docker build -t ${MC_INTEGRATION_IMAGE} mc
+
+docker-push-mc-integration:
+	docker push ${MC_INTEGRATION_IMAGE}
+	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_INTEGRATION_IMAGE}/|g" manifests/deis-mc-integration-pod.yaml
 
 .PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc

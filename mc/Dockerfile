@@ -1,8 +1,10 @@
-FROM golang:1.5
+FROM ubuntu-debootstrap:14.04
 
-WORKDIR /go/src/github.com/minio
-RUN git clone https://github.com/minio/minio
-WORKDIR /go/src/github.com/minio/minio
-ENV GOPATH /go
-ENV GOROOT /usr/local/go
-RUN make install
+RUN apt-get update -y && apt-get install -y -q ca-certificates
+
+ADD mc /bin/mc
+
+ADD ./integration.sh /bin/integration.sh
+RUN chmod +x /bin/integration.sh
+
+CMD mc

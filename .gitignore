@@ -6,3 +6,4 @@ genssl/server.csr
 genssl/server.key
 genssl/server.pem
 manifests/deis-minio-secretssl-final.yaml
+mc/mc

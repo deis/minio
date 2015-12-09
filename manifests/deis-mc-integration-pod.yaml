@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: deis-mc
+  name: deis-mc-integration
   labels:
     heritage: deis
     version: v2-alpha
@@ -11,9 +11,9 @@ spec:
   containers:
     - name: mc
       imagePullPolicy: Always
-      image: quay.io/deisci/mc:v2-alpha
+      image: quay.io/deisci/mc-integration:v2-alpha
       command:
-        - mc
+        - /bin/integration.sh
       args:
         - "mode memory limit 512MB"
       volumeMounts:
