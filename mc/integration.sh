@@ -9,6 +9,8 @@
 # "deis-minio" running in front of running in front of it.
 #
 # You can launch this script by running 'make mc-integration' from the parent directory.
+#
+# TODO: probably rewrite this script in Go!
 
 SECRET_PREFIX="/var/run/secrets/deis/minio/user"
 ACCESS_KEY_FILE="$SECRET_PREFIX/access-key-id"
