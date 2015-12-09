@@ -1,0 +1,26 @@
+# A debugging utility for testing Minio from within k8s.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deis-mc-integration
+  labels:
+    heritage: deis
+    version: v2-alpha
+spec:
+  restartPolicy: Never
+  containers:
+    - name: mc
+      imagePullPolicy: Always
+      image: quay.io/deisci/mc-integration:v2-alpha
+      command:
+        - /bin/integration.sh
+      args:
+        - "mode memory limit 512MB"
+      volumeMounts:
+        - name: minio-user
+          mountPath: /var/run/secrets/deis/minio/user
+          readOnly: true
+  volumes:
+    - name: minio-user
+      secret:
+        secretName: minio-user

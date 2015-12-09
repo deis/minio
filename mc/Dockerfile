@@ -4,4 +4,6 @@ RUN apt-get update -y && apt-get install -y -q ca-certificates
 
 ADD mc /bin/mc
 
+ADD ./integration.sh /bin/integration.sh
+
 CMD mc
