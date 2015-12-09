@@ -16,6 +16,7 @@ ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
 USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
 IMAGE := ${DEIS_REGISTRY}${SHORT_NAME}:${VERSION}
 MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
+MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
 
 all: build docker-build docker-push
 
@@ -65,10 +66,18 @@ kube-clean:
 kube-mc:
 	kubectl create -f manifests/deis-mc-pod.yaml
 
+kube-mc-integration:
+	kubectl create -f manifests/deis-mc-integration-pod.yaml
+
 mc:
 	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
 	docker build -t ${MC_IMAGE} mc
 	docker push ${MC_IMAGE}
 	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-pod.yaml
+
+mc-integration: mc
+	docker build -t ${MC_INTEGRATION_IMAGE} mc
+	docker push ${MC_INTEGRATION_IMAGE}
+	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-integration-pod.yaml
 
 .PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc
