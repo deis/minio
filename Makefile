@@ -10,11 +10,14 @@ BINDIR := ./rootfs/bin
 DEV_REGISTRY ?= $(docker-machine ip deis):5000
 DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
+IMAGE_PREFIX ?= deis
+
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
 ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
 USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
-IMAGE := ${DEIS_REGISTRY}${SHORT_NAME}:${VERSION}
+SSL_SEC := manifests/deis-${SHORT_NAME}-secretssl-final.yaml
+IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/${SHORT_NAME}:${VERSION}
 MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
 MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
 
@@ -43,18 +46,26 @@ docker-push: docker-build
 
 deploy: build docker-build docker-push kube-rc
 
+# TODO: would be nice to refactor all of this code into a single binary. 1/2 of it is already written in genssl/manifest_replace.go.
+# the other 1/2 is in gen.sh, and should be refactored as a few 'exec.Command' calls...
 ssl-cert:
 	# generate ssl certs
-	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 /bin/ash ./genssl/gen.sh && ./genssl/manifest-replace.sh
+	docker run --rm -v "${PWD}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
 	# replace values in ssl secrets file
-	docker run --rm -v "${PWD}":/pwd -w /pwd alpine:3.2 /bin/ash ./genssl/manifest_replace.sh
+	docker run --rm -v "${PWD}":/pwd -w /pwd golang:1.5.1-alpine go run ./genssl/manifest_replace.go --cert=./genssl/server.cert --key=./genssl/server.key --tpl=./manifests/deis-minio-secretssl-tpl.yaml --out=./manifests/deis-minio-secretssl-final.yaml
 
-kube-rc: kube-service
+kube-rc:
 	kubectl create -f ${RC}
 
-kube-secrets:
+kube-secrets: ssl-cert
 	kubectl create -f ${ADMIN_SEC}
 	kubectl create -f ${USER_SEC}
+	kubectl create -f ${SSL_SEC}
+
+kube-clean-secrets:
+	kubectl delete secret minio-user
+	kubectl delete secret minio-admin
+	kubectl delete secret minio-ssl
 
 kube-service: kube-secrets
 	- kubectl create -f ${SVC}
