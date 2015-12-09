@@ -4,9 +4,17 @@ go:
 branches:
   only:
     - master
+cache:
+  directories:
+    - vendor
 services:
   - docker
 sudo: required
+before_install:
+  - wget "https://github.com/Masterminds/glide/releases/download/0.7.2/glide-0.7.2-linux-amd64.tar.gz"
+  - sudo tar -vxz -C /usr/local/bin --strip=1 -f glide-0.7.2-linux-amd64.tar.gz
+install:
+  - GLIDE_HOME=/home/travis/.glide make bootstrap
 script:
   - make bootstrap test
 deploy:
