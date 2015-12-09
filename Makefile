@@ -69,15 +69,21 @@ kube-mc:
 kube-mc-integration:
 	kubectl create -f manifests/deis-mc-integration-pod.yaml
 
-mc:
+build-mc:
 	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
-	docker build -t ${MC_IMAGE} mc
-	docker push ${MC_IMAGE}
-	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-pod.yaml
 
-mc-integration: mc
+docker-build-mc:
+	docker build -t ${MC_IMAGE} mc
+
+docker-push-mc:
+	docker push ${MC_IMAGE}
+	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_IMAGE}/|g" manifests/deis-mc-pod.yaml
+
+docker-build-mc-integration:
 	docker build -t ${MC_INTEGRATION_IMAGE} mc
+
+docker-push-mc-integration:
 	docker push ${MC_INTEGRATION_IMAGE}
-	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${DEIS_REGISTRY}/|g" manifests/deis-mc-integration-pod.yaml
+	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_INTEGRATION_IMAGE}/|g" manifests/deis-mc-integration-pod.yaml
 
 .PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc
