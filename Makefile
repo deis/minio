@@ -4,7 +4,7 @@ export GO15VENDOREXPERIMENT=1
 
 # Note that Minio currently uses CGO.
 
-VERSION ?= 0.0.1-$(shell date "+%Y%m%d%H%M%S")
+VERSION ?= git-$(shell git rev-parse --short HEAD)
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
 DEV_REGISTRY ?= $(docker-machine ip deis):5000
