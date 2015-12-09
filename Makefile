@@ -30,10 +30,10 @@ build:
 	mkdir -p ${BINDIR}
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
-docker-build:
-	# build the minio server
-	docker build -t minio mc
-	docker cp `docker run -d minio`:/go/bin/minio $(BINDIR)
+docker-build: build-server
+	# copy the server binary from where it was built to the final image's file system.
+	# note that the minio server is built as a dependency of this build target.
+	cp server/minio ${BINDIR}
 
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
@@ -79,6 +79,10 @@ kube-mc:
 
 kube-mc-integration:
 	kubectl create -f manifests/deis-mc-integration-pod.yaml
+
+# build the minio server
+build-server:
+	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
 
 build-mc:
 	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
