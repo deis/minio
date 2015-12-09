@@ -16,3 +16,11 @@ spec:
         - mc
       args:
         - "mode memory limit 512MB"
+      volumeMounts:
+        - name: minio-user
+          mountPath: /var/run/secrets/deis/minio/user
+          readOnly: true
+  volumes:
+    - name: minio-user
+      secret:
+        secretName: minio-user
