@@ -1,0 +1,16 @@
+language: go
+go:
+  - 1.5.1
+branches:
+  only:
+    - master
+services:
+  - docker
+sudo: required
+script:
+  - make bootstrap test
+deploy:
+  provider: script
+  script: _scripts/deploy.sh
+  on:
+    branch: master
