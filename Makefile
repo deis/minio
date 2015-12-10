@@ -97,14 +97,14 @@ docker-build-mc:
 
 docker-push-mc:
 	docker push ${MC_IMAGE}
-	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_IMAGE}/|g" manifests/deis-mc-pod.yaml
+	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/mc:[0-9a-z-.]+|image: ${MC_IMAGE}|g" manifests/deis-mc-pod.yaml
 
 docker-build-mc-integration:
 	docker build -t ${MC_INTEGRATION_IMAGE} mc
 
 docker-push-mc-integration:
 	docker push ${MC_INTEGRATION_IMAGE}
-	perl -pi -e "s|image: [a-z0-9.:]+\/|image: ${MC_INTEGRATION_IMAGE}/|g" manifests/deis-mc-integration-pod.yaml
+	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/mc-integration:[0-9a-z-.]+|image: ${MC_INTEGRATION_IMAGE}|g" manifests/deis-mc-integration-pod.yaml
 
 test:
 	@echo "Implement functional tests in _tests directory"
