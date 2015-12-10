@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script builds the minio mc client (https://github.com/minio/mc) inside a Docker container. It should be run inside a golang:1.5.2 container, with the following environment variables set.
+# This script builds the minio server (https://github.com/minio/minio) inside a Docker container. It should be run inside a golang:1.5.2 container, with the following environment variables set.
 #
 # - GOROOT=/usr/local/go
 # - GO15VENDOREXPERIMENT=1
