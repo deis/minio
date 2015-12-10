@@ -23,8 +23,9 @@ spec:
           command:
             - boot
           args:
-            - "--cert=/var/run/secrets/deis/minio/ssl/access-cert"
-            - "--key=/var/run/secrets/deis/minio/ssl/access-pem"
+            # not running with ssl yet
+            # - "--cert=/var/run/secrets/deis/minio/ssl/access-cert"
+            # - "--key=/var/run/secrets/deis/minio/ssl/access-pem"
             - "server"
             - "/home/minio/"
           volumeMounts:
@@ -34,9 +35,9 @@ spec:
             - name: minio-user
               mountPath: /var/run/secrets/deis/minio/user
               readOnly: true
-            - name: minio-ssl
-              mountPath: /var/run/secrets/deis/minio/ssl
-              readOnly: true
+            # - name: minio-ssl
+            #   mountPath: /var/run/secrets/deis/minio/ssl
+            #   readOnly: true
       volumes:
         - name: minio-admin
           secret:
@@ -44,6 +45,6 @@ spec:
         - name: minio-user
           secret:
             secretName: minio-user
-        - name: minio-ssl
-          secret:
-            secretName: minio-ssl
+        # - name: minio-ssl
+        #   secret:
+        #     secretName: minio-ssl

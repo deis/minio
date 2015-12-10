@@ -20,7 +20,13 @@ spec:
         - name: minio-user
           mountPath: /var/run/secrets/deis/minio/user
           readOnly: true
+        - name: minio-ssl
+          mountPath: /var/run/secrets/deis/minio/ssl
+          readOnly: true
   volumes:
     - name: minio-user
       secret:
         secretName: minio-user
+    - name: minio-ssl
+      secret:
+        secretName: minio-ssl

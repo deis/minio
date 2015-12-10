@@ -5,12 +5,19 @@
 #
 # It's intended to be run inside a Docker container running an image built with the Dockerfile in this directory.
 # The 'mc' target in the Makefile (in the parent directory) builds such an image.
-# Finally, this script expects to run in a Kubernetes cluster with a Minio replication controller or pod running and a service called
-# "deis-minio" running in front of running in front of it.
 #
-# You can launch this script by running 'make mc-integration' from the parent directory.
+# Finally, this script expects to run in a Kubernetes cluster with the following components installed:
+#
+# 1. The minio-user secret installed
+# 3. A Minio replication controller or pod running
+# 4. A Minio service running
+#
+# To install all of these components, run 'make docker-push kube-service kube-rc' from the parent directory.
+#
+# Then, when you're ready to run this test, run 'make build-mc docker-build-mc-integration docker-push-mc-integration kube-mc-integration' from the parent directory.
 #
 # TODO: probably rewrite this script in Go!
+
 
 SECRET_PREFIX="/var/run/secrets/deis/minio/user"
 ACCESS_KEY_FILE="$SECRET_PREFIX/access-key-id"
