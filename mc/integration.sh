@@ -12,6 +12,9 @@
 #
 # TODO: probably rewrite this script in Go!
 
+CERT_LOCATION="/var/run/secrets/deis/minio/ssl/access-cert"
+cp $CERT_LOCATION /etc/ssl/certs/deis-minio-self-signed-cert.crt
+
 SECRET_PREFIX="/var/run/secrets/deis/minio/user"
 ACCESS_KEY_FILE="$SECRET_PREFIX/access-key-id"
 ACCESS_SECRET_FILE="$SECRET_PREFIX/access-secret-key"
