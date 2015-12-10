@@ -55,9 +55,9 @@ deploy: build docker-build docker-push kube-rc
 # the other 1/2 is in gen.sh, and should be refactored as a few 'exec.Command' calls...
 ssl-cert:
 	# generate ssl certs
-	docker run --rm -v "${PWD}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
+	docker run --rm -v "${CURDIR}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
 	# replace values in ssl secrets file
-	docker run --rm -v "${PWD}":/pwd -w /pwd golang:1.5.1-alpine go run ./genssl/manifest_replace.go --cert=./genssl/server.cert --key=./genssl/server.key --tpl=./manifests/deis-minio-secretssl-tpl.yaml --out=./manifests/deis-minio-secretssl-final.yaml
+	docker run --rm -v "${CURDIR}":/pwd -w /pwd golang:1.5.1-alpine go run ./genssl/manifest_replace.go --cert=./genssl/server.cert --key=./genssl/server.key --tpl=./manifests/deis-minio-secretssl-tpl.yaml --out=./manifests/deis-minio-secretssl-final.yaml
 
 kube-rc:
 	kubectl create -f ${RC}
@@ -87,10 +87,10 @@ kube-mc-integration:
 
 # build the minio server
 build-server:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
+	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
 
 build-mc:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${PWD}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
+	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
 
 docker-build-mc:
 	docker build -t ${MC_IMAGE} mc
