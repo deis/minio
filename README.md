@@ -1,5 +1,8 @@
 # Deis Minio
 
+[![Build Status](https://travis-ci.org/deis/minio.svg?branch=master)](https://travis-ci.org/deis/minio) [![Go Report Card](http://goreportcard.com/badge/deis/minio)](http://goreportcard.com/report/deis/minio)
+
+
 This package provides a [Minio](http://minio.io) S3-compatible object storage system on Kubernetes. It can be used as a [Deis](https://deis.com/) component to provide object storage for various other components, but it is flexible enough to be run anywhere else.
 
 We provide it as a Docker container, and also provide the following manifests to run it inside [Kubernetes](http://kubernetes.io/):
