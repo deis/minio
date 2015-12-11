@@ -1,4 +1,4 @@
-# Deis Minio
+# Deis Minio v2
 
 [![Build Status](https://travis-ci.org/deis/minio.svg?branch=master)](https://travis-ci.org/deis/minio) [![Go Report Card](http://goreportcard.com/badge/deis/minio)](http://goreportcard.com/report/deis/minio)
 
