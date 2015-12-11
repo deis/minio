@@ -31,7 +31,7 @@ Note: this component currently does not offer persistent storage from the Docker
 # Hacking Minio
 
 First, install [helm](http://helm.sh) and [boot up a kubernetes cluster][install-k8s]. Next, add the
-deis repository to your chart list:
+`deis` repository to your chart list:
 
 ```console
 $ helm repo add deis https://github.com/deis/charts
