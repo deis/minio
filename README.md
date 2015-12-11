@@ -71,7 +71,11 @@ If you want to hack on a new feature, build the deis/minio image and push it to 
 $ make docker-push
 ```
 
-Next, you'll want to modify the deis chart to use your custom image, then run `helm install` on the chart.
+Next, you'll want to remove the `deis-minio` [replication controller](http://kubernetes.io/v1.1/docs/user-guide/replication-controller.html) and re-create it to run your new image.
+
+```console
+make kube-rc
+```
 
 ## Installation
 
