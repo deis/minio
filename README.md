@@ -74,7 +74,7 @@ $ make docker-push
 Next, you'll want to remove the `deis-minio` [replication controller](http://kubernetes.io/v1.1/docs/user-guide/replication-controller.html) and re-create it to run your new image.
 
 ```console
-make kube-rc
+make kube-clean kube-rc
 ```
 
 ## Installation
