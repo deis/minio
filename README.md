@@ -24,7 +24,7 @@ We provide it as a Docker container, and also provide the following manifests to
 - [Secret](http://kubernetes.io/v1.1/docs/user-guide/secrets.html)s for:
   - User credentials
   - Admin credentials
-  - SSL
+  - SSL (note that the current version does not run with SSL enabled, however)
 
 Note: this component currently does not offer persistent storage from the Docker container.
 
