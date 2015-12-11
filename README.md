@@ -68,8 +68,10 @@ Creating build... ..o
 If you want to hack on a new feature, build the deis/minio image and push it to a Docker registry. The `$DEIS_REGISTRY` environment variable must point to a registry accessible to your Kubernetes cluster. If you're using a locally hosted Docker registry, you may need to configure the Docker engines on your Kubernetes nodes to allow `--insecure-registry 192.168.0.0/16` (or the appropriate address range).
 
 ```console
-$ make docker-push
+$ make build docker-push
 ```
+
+(note that `docker-push` runs `docker-build` implicitly)
 
 Next, you'll want to remove the `deis-minio` [replication controller](http://kubernetes.io/v1.1/docs/user-guide/replication-controller.html) and re-create it to run your new image.
 
