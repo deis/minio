@@ -2,6 +2,18 @@
 
 [![Build Status](https://travis-ci.org/deis/minio.svg?branch=master)](https://travis-ci.org/deis/minio) [![Go Report Card](http://goreportcard.com/badge/deis/minio)](http://goreportcard.com/report/deis/minio)
 
+Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy and manage
+applications on your own servers. Deis builds on [Kubernetes](http://kubernetes.io/) to provide
+a lightweight, [Heroku-inspired](http://heroku.com) workflow.
+
+## Work in Progress
+
+![Deis Graphic](https://s3-us-west-2.amazonaws.com/get-deis/deis-graphic-small.png)
+
+Deis Minio v2 is changing quickly. Your feedback and participation are more than welcome, but be
+aware that this project is considered a work in progress.
+
+# About
 
 This package provides a [Minio](http://minio.io) S3-compatible object storage system on Kubernetes. It can be used as a [Deis](https://deis.com/) component to provide object storage for various other components, but it is flexible enough to be run anywhere else.
 
