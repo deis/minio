@@ -7,4 +7,7 @@ ADD mc /bin/mc
 ADD ./integration.sh /bin/integration.sh
 RUN chmod +x /bin/integration.sh
 
+# this is so the minio client (https://github.com/minio/mc) works properly
+ENV DOCKERIMAGE=1
+
 CMD mc
