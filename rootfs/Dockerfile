@@ -3,6 +3,8 @@ FROM ubuntu-debootstrap:14.04
 ENV MINIOHOME /home/minio
 ENV MINIOUSER minio
 RUN useradd -m -d $MINIOHOME $MINIOUSER
+# this is so the minio client (https://github.com/minio/mc) works properly
+ENV DOCKERIMAGE=1
 
 RUN apt-get update -y && apt-get install -y -q \
 		ca-certificates \
