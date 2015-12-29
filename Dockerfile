@@ -8,6 +8,7 @@ ENV PATH ${GOROOT}/bin:${GOPATH}/bin/:$PATH
 
 ENV MINIOHOME /home/minio
 ENV MINIOUSER minio
+ENV DEIS_RELEASE=2.0.0-dev
 RUN useradd -m -d $MINIOHOME $MINIOUSER
 
 RUN apt-get update -y && apt-get install -y -q \
