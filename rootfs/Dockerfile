@@ -2,6 +2,7 @@ FROM ubuntu-debootstrap:14.04
 
 ENV MINIOHOME /home/minio
 ENV MINIOUSER minio
+ENV DEIS_VERSION=2.0.0-dev
 RUN useradd -m -d $MINIOHOME $MINIOUSER
 
 RUN apt-get update -y && apt-get install -y -q \
