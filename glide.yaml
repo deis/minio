@@ -11,7 +11,7 @@ import:
 - package: gopkg.in/yaml.v2
   version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
 - package: github.com/deis/pkg/aboutme
-  version: ">=0.2.1"
+  version: f63d9718b86f17c9320f838fb3eb6039cadb9691
 - package: github.com/google/protobuf
   version: b640f216a56ae25aab9a1fc6f21aa1a56c304494
 ignore:

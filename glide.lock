@@ -182,7 +182,7 @@ imports:
 - name: github.com/deckarep/golang-set
   version: ef32fa3046d9f249d399f98ebaf9be944430fd1d
 - name: github.com/deis/pkg
-  version: ee60d947fecd410bd9ea30ffb53f9ea3e6dc038e
+  version: f63d9718b86f17c9320f838fb3eb6039cadb9691
   subpackages:
   - aboutme
 - name: github.com/denverdino/aliyungo
