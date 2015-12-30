@@ -5,13 +5,13 @@ metadata:
   name: deis-mc
   labels:
     heritage: deis
-    version: 2.0.0-alpha
+    version: 2.0.0-beta
 spec:
   restartPolicy: Never
   containers:
     - name: mc
-      imagePullPolicy: IfNotPresent
-      image: quay.io/deis/mc:2.0.0-alpha
+      imagePullPolicy: Always
+      image: quay.io/deisci/mc:v2-beta
       command:
         - mc
       args:
