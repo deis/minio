@@ -4,7 +4,7 @@ metadata:
   name: deis-minio
   labels:
     heritage: deis
-    release: 2.0.0-alpha
+    release: 2.0.0-alpha2
 spec:
   replicas: 1
   selector:
@@ -15,9 +15,9 @@ spec:
         app: deis-minio
     spec:
       containers:
-        - imagePullPolicy: IfNotPresent
+        - imagePullPolicy: Always
           name: deis-minio
-          image: quay.io/deis/minio:2.0.0-alpha
+          image: quay.io/deisci/minio:v2-alpha2
           ports:
             - containerPort: 9000
           command:
