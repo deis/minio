@@ -4,6 +4,8 @@ ENV MINIOHOME /home/minio
 ENV MINIOUSER minio
 ENV DEIS_RELEASE=2.0.0-dev
 RUN useradd -m -d $MINIOHOME $MINIOUSER
+# this is so the minio client (https://github.com/minio/mc) works properly
+ENV DOCKERIMAGE=1
 
 RUN apt-get update -y && apt-get install -y -q \
 		ca-certificates \

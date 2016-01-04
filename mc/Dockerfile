@@ -8,4 +8,7 @@ ENV DEIS_RELEASE=2.0.0-dev
 ADD ./integration.sh /bin/integration.sh
 RUN chmod +x /bin/integration.sh
 
+# this is so the minio client (https://github.com/minio/mc) works properly
+ENV DOCKERIMAGE=1
+
 CMD mc
