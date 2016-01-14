@@ -35,6 +35,8 @@ spec:
             - name: minio-user
               mountPath: /var/run/secrets/deis/minio/user
               readOnly: true
+            - name: minio-data
+              mountPath: /mnt/minio/data
             # - name: minio-ssl
             #   mountPath: /var/run/secrets/deis/minio/ssl
             #   readOnly: true
@@ -46,7 +48,9 @@ spec:
           secret:
             secretName: minio-user
         - name: minio-data
-          
+          PersistentVolumeClaim:
+            claimName: minio-data
+
         # - name: minio-ssl
         #   secret:
         #     secretName: minio-ssl
