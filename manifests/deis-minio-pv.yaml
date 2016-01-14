@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: minio-data
+  name: deis-minio-data
   labels:
     type: local
 spec:
