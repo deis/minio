@@ -1,6 +1,6 @@
-FROM ubuntu-debootstrap:14.04
+FROM alpine:3.3
 
-RUN apt-get update -y && apt-get install -y -q ca-certificates
+RUN apk add -U ca-certificates && rm -rf /var/cache/apk/*
 
 ADD mc /bin/mc
 
