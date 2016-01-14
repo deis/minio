@@ -12,6 +12,7 @@ RUN apt-get update -y && apt-get install -y -q curl
 RUN curl -f -SL https://dl.minio.io:9000/updates/2015/Sept/linux-amd64/mc -o /usr/bin/mc
 RUN chmod 755 /usr/bin/mc
 COPY . /
+RUN mkdir -p /mnt/minio/data && chmod 777 /mnt/minio/data
 USER minio
 RUN mkdir /home/minio/.minio
 ENTRYPOINT ["boot"]

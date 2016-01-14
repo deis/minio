@@ -26,8 +26,8 @@ spec:
             # not running with ssl yet
             # - "--cert=/var/run/secrets/deis/minio/ssl/access-cert"
             # - "--key=/var/run/secrets/deis/minio/ssl/access-pem"
-            - "server"
-            - "/mnt/minio/data"
+            - server
+            - /mnt/minio/data
           volumeMounts:
             - name: minio-admin
               mountPath: /var/run/secrets/deis/minio/admin
