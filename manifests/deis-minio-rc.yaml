@@ -48,7 +48,7 @@ spec:
           secret:
             secretName: minio-user
         - name: minio-data
-          PersistentVolumeClaim:
+          persistentVolumeClaim:
             claimName: minio-data
 
         # - name: minio-ssl
