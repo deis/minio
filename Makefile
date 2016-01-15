@@ -94,8 +94,6 @@ kube-mc-integration:
 build-server:
 	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
 
-# targets for mc
-
 mc-build:
 	make -C mc build
 
