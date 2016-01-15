@@ -13,4 +13,5 @@ mkdir -p $GOPATH/src/github.com/minio
 cd $GOPATH/src/github.com/minio
 curl -L -O -s https://github.com/minio/minio/archive/master.tar.gz && tar -xvzf master.tar.gz && rm master.tar.gz && mv minio-master minio
 cd minio
-go build --ldflags '-extldflags -static' -o /pwd/minio
+make
+cp $GOPATH/bin/minio /pwd/minio
