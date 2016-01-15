@@ -94,22 +94,24 @@ kube-mc-integration:
 build-server:
 	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
 
-build-mc:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/mc":/pwd -w /pwd golang:1.5.2 ./install.sh
+# targets for mc
 
-docker-build-mc:
-	docker build -t ${MC_IMAGE} mc
+mc-build:
+	make -C mc build
 
-docker-push-mc:
-	docker push ${MC_IMAGE}
-	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/mc:[0-9a-z-.]+|image: ${MC_IMAGE}|g" manifests/deis-mc-pod.yaml
+mc-docker-build:
+	make -C mc docker-build
 
-docker-build-mc-integration:
-	docker build -t ${MC_INTEGRATION_IMAGE} mc
+mc-docker-push:
+	make -C mc docker-push
 
-docker-push-mc-integration:
-	docker push ${MC_INTEGRATION_IMAGE}
-	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/mc-integration:[0-9a-z-.]+|image: ${MC_INTEGRATION_IMAGE}|g" manifests/deis-mc-integration-pod.yaml
+# targets for the mc integration tests
+
+mc-integration-docker-build:
+	make -C mc/integration docker-build
+
+mc-integration-docker-push:
+	make -C mc/integration docker-push
 
 test:
 	@echo "Implement functional tests in _tests directory"
