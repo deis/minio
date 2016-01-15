@@ -2,7 +2,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: deis-mc
+  name: deis-mc-integration
+  namespace: {{.POD_NAMESPACE}}
   labels:
     heritage: deis
     version: 2.0.0-beta
@@ -11,16 +12,22 @@ spec:
   containers:
     - name: mc
       imagePullPolicy: Always
-      image: quay.io/deisci/mc:v2-beta
+      image: {{.POD_IMAGE}}
       command:
-        - mc
+        - /bin/integration.sh
       args:
         - "mode memory limit 512MB"
       volumeMounts:
         - name: minio-user
           mountPath: /var/run/secrets/deis/minio/user
           readOnly: true
+        - name: minio-ssl
+          mountPath: /var/run/secrets/deis/minio/ssl
+          readOnly: true
   volumes:
     - name: minio-user
       secret:
         secretName: minio-user
+    - name: minio-ssl
+      secret:
+        secretName: minio-ssl

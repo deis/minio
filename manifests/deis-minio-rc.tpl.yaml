@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   name: deis-minio
+  namespace: {{.RC_NAMESPACE}}
   labels:
     heritage: deis
     release: 2.0.0-beta
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: deis-minio
-          image: quay.io/arschles/minio:devel
+          image: {{.RC_IMAGE}}
           imagePullPolicy: Always
           env:
             - name: HEALTH_SERVER_PORT
