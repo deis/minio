@@ -123,6 +123,7 @@ func main() {
 	os.Args[0] = "minio"
 	mc := strings.Join(os.Args, " ")
 	runErrCh := make(chan error)
+	log.Printf("starting Minio server")
 	go func() {
 		if err := run(mc); err != nil {
 			runErrCh <- err
