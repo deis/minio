@@ -19,9 +19,9 @@ import (
 )
 
 const (
-	localMinioScheme = "http"
-	localMinioHost   = "localhost"
-	localMinioPort   = 9000
+	localMinioInsecure = true
+	localMinioHost     = "localhost"
+	localMinioPort     = 9000
 )
 
 var (
@@ -106,21 +106,21 @@ func readSecrets() (string, string) {
 	return strings.TrimSpace(string(keyID)), strings.TrimSpace(string(accessKey))
 }
 
+func newMinioClient(host string, port int, accessKey, accessSecret string, insecure bool) (minio.CloudStorageClient, error) {
+	return minio.New(
+		fmt.Sprintf("%s:%d", host, port),
+		accessKey,
+		accessSecret,
+		insecure,
+	)
+}
+
 func main() {
 	pod, err := aboutme.FromEnv()
 	checkError(err)
 	key, access := readSecrets()
 
-	insecure := true
-	if localMinioScheme == "https" {
-		insecure = false
-	}
-	minioClient, err := minio.New(
-		fmt.Sprintf("%s://%s:%d", localMinioScheme, localMinioHost, localMinioPort),
-		key,
-		access,
-		insecure,
-	)
+	minioClient, err := newMinioClient(localMinioHost, localMinioPort, key, access, localMinioInsecure)
 	if err != nil {
 		log.Printf("Error creating minio client (%s)", err)
 		os.Exit(1)
