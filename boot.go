@@ -15,6 +15,13 @@ import (
 	"github.com/deis/minio/src/healthsrv"
 	"github.com/deis/pkg/aboutme"
 	"github.com/deis/pkg/utils"
+	minio "github.com/minio/minio-go"
+)
+
+const (
+	localMinioScheme = "http"
+	localMinioHost   = "localhost"
+	localMinioPort   = 9000
 )
 
 var (
@@ -103,6 +110,22 @@ func main() {
 	pod, err := aboutme.FromEnv()
 	checkError(err)
 	key, access := readSecrets()
+
+	insecure := true
+	if localMinioScheme == "https" {
+		insecure = false
+	}
+	minioClient, err := minio.New(
+		fmt.Sprintf("%s://%s:%d", localMinioScheme, localMinioHost, localMinioPort),
+		key,
+		access,
+		insecure,
+	)
+	if err != nil {
+		log.Printf("Error creating minio client (%s)", err)
+		os.Exit(1)
+	}
+
 	secrets := []Secret{
 		{
 			Host:      pod.IP,
@@ -111,10 +134,9 @@ func main() {
 		},
 	}
 	t := template.New("MinioTpl")
-
 	t, err = t.Parse(templv2)
-
 	checkError(err)
+
 	err = os.MkdirAll(configdir, 0755)
 	checkError(err)
 	output, err := os.Create(configdir + "config.json")
@@ -145,7 +167,7 @@ func main() {
 
 	healthSrvErrCh := make(chan error)
 	go func() {
-		if err := healthsrv.Start(healthSrvHost, healthSrvPort); err != nil {
+		if err := healthsrv.Start(healthSrvHost, healthSrvPort, minioClient); err != nil {
 			healthSrvErrCh <- err
 		} else {
 			healthSrvErrCh <- errHealthSrvExited
