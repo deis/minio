@@ -19,3 +19,4 @@ import:
 - package: github.com/google/protobuf
   version: b640f216a56ae25aab9a1fc6f21aa1a56c304494
 - package: github.com/minio/minio-go
+  version: 0.2.5
