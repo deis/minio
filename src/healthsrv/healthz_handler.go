@@ -6,22 +6,24 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/deis/minio/src/storage"
 	minio "github.com/minio/minio-go"
 )
 
-func healthZHandler(minioClient minio.CloudStorageClient) http.Handler {
-	type resp struct {
-		Buckets []minio.BucketInfo `json:"buckets"`
-	}
+type healthZResp struct {
+	Buckets []minio.BucketInfo `json:"buckets"`
+}
+
+func healthZHandler(bucketLister storage.BucketLister) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		buckets, err := minioClient.ListBuckets()
+		buckets, err := bucketLister.ListBuckets()
 		if err != nil {
 			str := fmt.Sprintf("Probe error: listing buckets (%s)", err)
 			log.Println(str)
 			http.Error(w, str, http.StatusInternalServerError)
 			return
 		}
-		if err := json.NewEncoder(w).Encode(resp{Buckets: buckets}); err != nil {
+		if err := json.NewEncoder(w).Encode(healthZResp{Buckets: buckets}); err != nil {
 			str := fmt.Sprintf("Probe error: encoding buckets json (%s)", err)
 			log.Println(str)
 			http.Error(w, str, http.StatusInternalServerError)
