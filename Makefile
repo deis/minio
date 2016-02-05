@@ -47,7 +47,7 @@ docker-build: build-server
 	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/${SHORT_NAME}:[0-9a-z-.]+|image: ${IMAGE}|g" ${RC}
 	perl -pi -e "s|release: [a-zA-Z0-9.+_-]+|release: ${VERSION}|g" ${RC}
 
-docker-push: docker-build
+docker-push:
 	docker push ${IMAGE}
 
 deploy: build docker-build docker-push kube-rc
@@ -92,7 +92,8 @@ kube-mc-integration:
 
 # build the minio server
 build-server:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
+	# the PWD environment variable is a workaround to ensure that the 'checkdeps' build target works in the minio repo
+	docker run -e CGO_ENABLED=0 -e GO15VENDOREXPERIMENT=1 -e GOPATH=/go -e GOROOT=/usr/local/go -v ${GOPATH}:/go -w /go/src/github.com/minio/minio -e PWD=/go/src/github.com/minio/minio golang:1.5.2 make
 
 mc-build:
 	make -C mc build
