@@ -1,4 +1,6 @@
 package: main
+ignore:
+- appengine
 import:
 - package: gopkg.in/natefinch/lumberjack.v2
   version: 600ceb4523e5b7ff745f91083c8a023c2bf73af5
@@ -10,9 +12,10 @@ import:
   version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
 - package: gopkg.in/yaml.v2
   version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
-- package: github.com/deis/pkg/aboutme
+- package: github.com/deis/pkg
   version: f63d9718b86f17c9320f838fb3eb6039cadb9691
-- package: github.com/google/protobuf
-  version: b640f216a56ae25aab9a1fc6f21aa1a56c304494
-ignore:
-  - appengine
+  subpackages:
+  - /aboutme
+  - /utils
+- package: github.com/minio/minio-go
+  version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
