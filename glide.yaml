@@ -15,8 +15,7 @@ import:
 - package: github.com/deis/pkg
   version: f63d9718b86f17c9320f838fb3eb6039cadb9691
   subpackages:
-  - aboutme
-- package: github.com/google/protobuf
-  version: b640f216a56ae25aab9a1fc6f21aa1a56c304494
+  - /aboutme
+  - /utils
 - package: github.com/minio/minio-go
-  version: 0.2.5
+  version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
