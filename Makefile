@@ -32,6 +32,9 @@ all: build docker-build docker-push
 bootstrap:
 	${DEV_ENV_CMD} glide install
 
+glideup:
+	${DEV_ENV_CMD} glide up
+
 build:
 	mkdir -p ${BINDIR}
 	${DEV_ENV_PREFIX} -e CGO_ENABLED=0 ${DEV_ENV_IMAGE} go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
