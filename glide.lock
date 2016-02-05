@@ -1,5 +1,5 @@
 hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-updated: 2016-02-04T23:58:05.077980188Z
+updated: 2016-02-05T17:57:29.826338601Z
 imports:
 - name: bitbucket.org/bertimus9/systemstat
   version: 1468fd0db20598383c9393cccaa547de6ad99e5e
@@ -303,7 +303,6 @@ imports:
   version: 3986be78bf859e01f01af631ad76da5b269d270c
 - name: github.com/Graylog2/go-gelf
   version: 06974fc6689396066f6ebf5bab951d41979e3386
-  repo: https://github.com/Graylog2/go-gelf
 - name: github.com/hashicorp/consul
   version: 954aec66231b79c161a4122b023fbcad13047f79
   subpackages:
@@ -401,7 +400,6 @@ imports:
   version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
 - name: github.com/mistifyio/go-zfs
   version: 1b4ae6fb4e77b095934d4430860ff202060169f8
-  repo: https://github.com/mistifyio/go-zfs
 - name: github.com/mitchellh/cli
   version: 8102d0ed5ea2709ade1243798785888175f6e415
 - name: github.com/mitchellh/mapstructure
@@ -599,7 +597,7 @@ imports:
   subpackages:
   - pkg
 - name: launchpad.net/gocheck
-  version: ""
+  version: "87"
 - name: speter.net/go/exp/math/dec/inf
   version: 42ca6cd68aa922bc3f32f1e056e61b65945d9ad7
 devImports: []
