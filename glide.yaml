@@ -1,6 +1,9 @@
 package: main
 ignore:
 - appengine
+- appengine/datastore
+- appengine/memcache
+- appengine/user
 import:
 - package: gopkg.in/natefinch/lumberjack.v2
   version: 600ceb4523e5b7ff745f91083c8a023c2bf73af5
