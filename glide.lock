@@ -1,5 +1,5 @@
-hash: 4afce67bc453566ffffe0ce7b8b8b3659cf1000db5f1d90d19902dd672f330f5
-updated: 2016-02-05T23:18:33.568574547Z
+hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+updated: 2016-02-18T11:01:10.760036865-07:00
 imports:
 - name: bitbucket.org/bertimus9/systemstat
   version: 1468fd0db20598383c9393cccaa547de6ad99e5e
@@ -24,9 +24,6 @@ imports:
 - name: code.google.com/p/goprotobuf
   version: ""
   repo: https://code.google.com/p/goprotobuf
-- name: code.google.com/p/gosqlite
-  version: ""
-  repo: https://code.google.com/p/gosqlite
 - name: code.google.com/p/log4go
   version: ""
   repo: https://code.google.com/p/log4go
@@ -89,7 +86,7 @@ imports:
 - name: github.com/bitly/go-simplejson
   version: aabad6e819789e569bd6aabf444c935aa9ba1e44
 - name: github.com/bmizerany/pat
-  version: b8a35001b773c267eb260a691f4e5499a3531600
+  version: c068ca2f0aacee5ac3681d68e4d0a003b7d1fd2c
   repo: https://github.com/bmizerany/pat
 - name: github.com/boltdb/bolt
   version: 0f053fabc06119583d61937a0a06ef0ba0f1b301
@@ -197,7 +194,7 @@ imports:
 - name: github.com/dgrijalva/jwt-go
   version: 5ca80149b9d3f8b863af0e2bb6742e608603bd99
 - name: github.com/docker/distribution
-  version: dd58349b355f346a020a08b2fd9306549293c4ef
+  version: 5806f275bf3c5457240909f723645529e1b90e4c
   repo: https://github.com/docker/distribution
 - name: github.com/docker/docker
   version: 2b27fe17a1b3fb8472fde96d768fa70996adf201
@@ -212,17 +209,16 @@ imports:
 - name: github.com/docker/go-units
   version: 8e2d4523730c73120e10d4652f36ad6010998f4e
 - name: github.com/docker/goamz
-  version: 29510ec7eba995a3750f6b38128c5318f8b71592
+  version: f0a21f5b2e12f83a505ecf79b633bb2035cf6f85
   subpackages:
   - aws
-  - cloudfront
   - s3
 - name: github.com/docker/libcontainer
   version: 5dc7ba0f24332273461e45bc49edcb4d5aa6c44c
 - name: github.com/docker/libkv
   version: c2aac5dbbaa5c872211edea7c0f32b3bd67e7410
 - name: github.com/docker/libnetwork
-  version: 6cd5d90eb6b25d9e1ba41c45ad39f7df36d981b3
+  version: 73e3ce645f1d44a7474c24ca08bb5789ecca9d8f
   repo: https://github.com/docker/libnetwork
 - name: github.com/docker/libtrust
   version: fa567046d9b14f6aa788882a950d69651d230b21
@@ -258,6 +254,8 @@ imports:
 - name: github.com/go-check/check
   version: 4f90aeace3a26ad7021961c297b22c42160c7b25
   repo: https://github.com/go-check/check
+- name: github.com/go-ini/ini
+  version: afbd495e5aaea13597b5e14fe514ddeaa4d76fc3
 - name: github.com/godbus/dbus
   version: 939230d2086a4f1870e04c52e0a376c25bae0ec4
 - name: github.com/gogo/protobuf
@@ -317,10 +315,10 @@ imports:
   version: 14c555599c2a4f493c1e13fd1ea6fdf721739028
   repo: https://github.com/gorilla/schema
 - name: github.com/gorilla/websocket
-  version: 234959944d9cf05229b02e8b386e5cffe1e4e04a
+  version: 4935ba31a2adbfcd9e08b86d2657659afbf1af9a
   repo: https://github.com/gorilla/websocket
 - name: github.com/Graylog2/go-gelf
-  version: 06974fc6689396066f6ebf5bab951d41979e3386
+  version: aab2f594e4585d43468ac57287b0dece9d806883
   repo: https://github.com/Graylog2/go-gelf
 - name: github.com/hashicorp/consul
   version: 954aec66231b79c161a4122b023fbcad13047f79
@@ -330,7 +328,7 @@ imports:
   version: e4b2dc34c0f698ee04750bf2035d8b9384233e1b
   repo: https://github.com/hashicorp/go-checkpoint
 - name: github.com/hashicorp/go-cleanhttp
-  version: ce617e79981a8fff618bb643d155133a8f38db96
+  version: 875fb671b3ddc66f8e2f0acc33829c8cb989a38d
   repo: https://github.com/hashicorp/go-cleanhttp
 - name: github.com/hashicorp/go-msgpack
   version: 71c2886f5a673a35f909803f38ece5810165097b
@@ -343,10 +341,10 @@ imports:
   version: 104dcad90073cd8d1e6828b2af19185b60cf3e29
   repo: https://github.com/hashicorp/go.net
 - name: github.com/hashicorp/golang-lru
-  version: ce7dece472ba96dab1807940f0614f3254f883e7
+  version: a0d98a5f288019575c6d1f4bb1573fef2d1fcdc4
   repo: https://github.com/hashicorp/golang-lru
 - name: github.com/hashicorp/hcl
-  version: e96d23138c76470c808bf6586bdaf981bbd25cae
+  version: 1c284ec98f4b398443cbabb0d9197f7f4cc0077c
   repo: https://github.com/hashicorp/hcl
 - name: github.com/hashicorp/logutils
   version: 0dc08b1671f34c4250ce212759ebd880f743d883
@@ -390,6 +388,8 @@ imports:
   version: afde71eb1740fd763ab9450e1f700ba0e53c36d0
   subpackages:
   - client
+- name: github.com/jmespath/go-jmespath
+  version: 0b12d6b521d83fc7f755e7cfc1b1fbdd35a01a74
 - name: github.com/jmhodges/levigo
   version: 1ddad808d437abb2b8a55a950ec2616caa88969b
   repo: https://github.com/jmhodges/levigo
@@ -398,7 +398,7 @@ imports:
 - name: github.com/juju/ratelimit
   version: 772f5c38e468398c4511514f4f6aa9a4185bc0a0
 - name: github.com/julienschmidt/httprouter
-  version: 5273944025bdfe8df6c10f286ce7742b83673033
+  version: 153d9c9fa8b6a5995c6a300cca099e1f3408733f
   repo: https://github.com/julienschmidt/httprouter
 - name: github.com/kardianos/osext
   version: 8fef92e41e22a70e700a96b29f066cda30ea24ef
@@ -436,12 +436,16 @@ imports:
   - messenger
   - scheduler
   - upid
+- name: github.com/Microsoft/go-winio
+  version: eb176a9831c54b88eaf9eb4fbc24b94080d910ad
+- name: github.com/Microsoft/hcsshim
+  version: 43858ef3c5c944dfaaabfbe8b6ea093da7f28dba
 - name: github.com/miekg/dns
   version: 3f504e8dabd5d562e997d19ce0200aa41973e1b2
 - name: github.com/minio/minio-go
-  version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
+  version: 84b89f6f458668d047b0de2d2cdf596dcf4a79a1
 - name: github.com/mistifyio/go-zfs
-  version: 1b4ae6fb4e77b095934d4430860ff202060169f8
+  version: 35ad200fe18bfbdf01c3210c0b3800aaf3a174ac
   repo: https://github.com/mistifyio/go-zfs
 - name: github.com/mitchellh/cli
   version: 5c87c51cedf76a1737bf5ca3979e8644871598a6
@@ -611,7 +615,7 @@ imports:
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: db2353fc1b663d79d1001e206afc02a5ec9f4291
+  version: 07b9a78963006a15c538ec5175243979025fa7a8
   repo: https://golang.org/x/text
 - name: golang.org/x/tools
   version: 4f50f44d7a3206e9e28b984e023efce2a4a75369
