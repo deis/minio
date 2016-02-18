@@ -44,11 +44,7 @@ build:
 test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
 
-docker-build: build-server
-	# copy the server binary from where it was built to the final image's file system.
-	# note that the minio server is built as a dependency of this build target.
-	cp server/minio ${BINDIR}
-
+docker-build:
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
 	# These are both YAML specific
@@ -97,10 +93,6 @@ kube-mc:
 
 kube-mc-integration:
 	kubectl create -f manifests/deis-mc-integration-pod.yaml
-
-# build the minio server
-build-server:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.5.2 ./install.sh
 
 mc-build:
 	make -C mc build
