@@ -140,6 +140,7 @@ func main() {
 	err = os.MkdirAll(configdir, 0755)
 	checkError(err)
 	output, err := os.Create(configdir + "config.json")
+	checkError(err)
 	err = t.Execute(output, secrets)
 	checkError(err)
 	os.Args[0] = "minio"
