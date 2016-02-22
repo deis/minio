@@ -106,7 +106,7 @@ func readSecrets() (string, string) {
 	return strings.TrimSpace(string(keyID)), strings.TrimSpace(string(accessKey))
 }
 
-func newMinioClient(host string, port int, accessKey, accessSecret string, insecure bool) (minio.CloudStorageClient, error) {
+func newMinioClient(host string, port int, accessKey, accessSecret string, insecure bool) (*minio.Client, error) {
 	return minio.New(
 		fmt.Sprintf("%s:%d", host, port),
 		accessKey,
