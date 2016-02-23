@@ -21,4 +21,4 @@ import:
   - /aboutme
   - /utils
 - package: github.com/minio/minio-go
-  version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
+  version: v1.0.0
