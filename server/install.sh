@@ -9,9 +9,10 @@
 #
 # See the 'mc' build target in the Makefile (in the parent directory) for an example of how to use this script.
 
+apt-get update && apt-get install -yq yasm
 mkdir -p $GOPATH/src/github.com/minio
 cd $GOPATH/src/github.com/minio
-curl -L -O -s https://github.com/minio/minio/archive/master.tar.gz && tar -xvzf master.tar.gz && rm master.tar.gz && mv minio-master minio
+git clone -b deis --single-branch https://github.com/deis/minio-src.git minio
 cd minio
 make install
 cp $GOPATH/bin/minio /pwd/minio
