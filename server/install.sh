@@ -12,7 +12,8 @@
 apt-get update && apt-get install -yq yasm
 mkdir -p $GOPATH/src/github.com/minio
 cd $GOPATH/src/github.com/minio
-git clone -b deis --single-branch https://github.com/deis/minio-src.git minio
+git clone -b master --single-branch https://github.com/minio/minio.git minio
 cd minio
+git reset --hard 356b889
 make install
 cp $GOPATH/bin/minio /pwd/minio
