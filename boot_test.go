@@ -5,7 +5,7 @@ import (
 )
 
 func TestNewMinioClient(t *testing.T) {
-	client, err := newMinioClient("localhost", 8095, "access_key", "access_secret_key", false)
+	client, err := newMinioClient("localhost", "8095", "access_key", "access_secret_key", false)
 	if err != nil {
 		t.Fatalf("unexpected error creating minio client (%s)", err)
 	}
