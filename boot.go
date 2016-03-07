@@ -20,8 +20,8 @@ import (
 
 const (
 	localMinioInsecure = true
-	localMinioHost     = "localhost"
-	localMinioPort     = 9000
+	defaultMinioHost   = "localhost"
+	defaultMinioPort   = "9000"
 )
 
 var (
@@ -106,9 +106,9 @@ func readSecrets() (string, string) {
 	return strings.TrimSpace(string(keyID)), strings.TrimSpace(string(accessKey))
 }
 
-func newMinioClient(host string, port int, accessKey, accessSecret string, insecure bool) (minio.CloudStorageClient, error) {
+func newMinioClient(host, port, accessKey, accessSecret string, insecure bool) (minio.CloudStorageClient, error) {
 	return minio.New(
-		fmt.Sprintf("%s:%d", host, port),
+		fmt.Sprintf("%s:%s", host, port),
 		accessKey,
 		accessSecret,
 		insecure,
@@ -120,7 +120,15 @@ func main() {
 	checkError(err)
 	key, access := readSecrets()
 
-	minioClient, err := newMinioClient(localMinioHost, localMinioPort, key, access, localMinioInsecure)
+	minioHost := os.Getenv("MINIO_HOST")
+	if minioHost == "" {
+		minioHost = defaultMinioHost
+	}
+	minioPort := os.Getenv("MINIO_PORT")
+	if minioPort == "" {
+		minioPort = defaultMinioPort
+	}
+	minioClient, err := newMinioClient(minioHost, minioPort, key, access, localMinioInsecure)
 	if err != nil {
 		log.Printf("Error creating minio client (%s)", err)
 		os.Exit(1)
