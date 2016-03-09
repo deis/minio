@@ -3,6 +3,7 @@ kind: Service
 metadata:
   # Give this a useful name.
   name: deis-minio
+  namespace: {{.SVC_NAMESPACE}}
   labels:
     heritage: deis
     release: 0.0.0

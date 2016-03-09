@@ -15,12 +15,18 @@ BINDIR := ./rootfs/bin
 DEV_REGISTRY ?= $(docker-machine ip deis):5000
 DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
+ENVTPL_PREFIX := docker run --rm -v ${CURDIR}:/pwd -w /pwd
+ENVTPL_IMAGE := quay.io/arschles/envtpl:0.0.1
+
 IMAGE_PREFIX ?= deis
 
-RC := manifests/deis-${SHORT_NAME}-rc.yaml
-SVC := manifests/deis-${SHORT_NAME}-service.yaml
-ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
-USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
+NAMESPACE ?= deis
+RC := manifests/deis-${SHORT_NAME}-rc.tpl.yaml
+SVC := manifests/deis-${SHORT_NAME}-service.tpl.yaml
+ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.tpl.yaml
+USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.tpl.yaml
+MC_POD := manifests/deis-mc-pod.tpl.yaml
+MC_INTEGRATION_POD := manifests/deis-mc-integration-pod.tpl.yaml
 # note that we are not running minio with ssl turned on. this variable is commented
 # SSL_SEC := manifests/deis-${SHORT_NAME}-secretssl-final.yaml
 IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/${SHORT_NAME}:${VERSION}
@@ -71,12 +77,12 @@ ssl-cert:
 	docker run --rm -v "${CURDIR}":/pwd -w /pwd golang:1.5.1-alpine go run ./genssl/manifest_replace.go --cert=./genssl/server.cert --key=./genssl/server.key --tpl=./manifests/deis-minio-secretssl-tpl.yaml --out=./manifests/deis-minio-secretssl-final.yaml
 
 kube-rc:
-	kubectl create -f ${RC}
+	${ENVTPL_PREFIX} -e RC_NAMESPACE=${NAMESPACE} -e RC_IMAGE=${IMAGE} ${ENVTPL_IMAGE} envtpl -in=${RC} | kubectl create -f -
 
 # note that we are not running minio with ssl turned on. the ssl related dependency and commands are commented out in this target
 kube-secrets: #ssl-cert
-	kubectl create -f ${ADMIN_SEC}
-	kubectl create -f ${USER_SEC}
+	${ENVTPL_PREFIX} -e SECRET_NAMESPACE=${NAMESPACE} ${ENVTPL_IMAGE} envtpl -in=${ADMIN_SEC} | kubectl create -f -
+	${ENVTPL_PREFIX} -e SECRET_NAMESPACE=${NAMESPACE} ${ENVTPL_IMAGE} envtpl -in=${USER_SEC} | kubectl create -f -
 	# kubectl create -f ${SSL_SEC}
 
 # note that we are not running minio with ssl turned on. the ssl related dependency and commands are commented out in this target
@@ -86,17 +92,17 @@ kube-clean-secrets:
 	# kubectl delete secret minio-ssl
 
 kube-service: kube-secrets
-	- kubectl create -f ${SVC}
-	- kubectl create -f manifests/deis-minio-secretUser.yaml
+	${ENVTPL_PREFIX} -e SVC_NAMESPACE=${NAMESPACE} ${ENVTPL_IMAGE} envtpl -in=${SVC} | kubectl create -f -
+	${ENVTPL_PREFIX} -e SECRET_NAMESPACE=${NAMESPACE} ${ENVTPL_IMAGE} envtpl -in=${USER_SEC} | kubectl create -f -
 
 kube-clean:
-	- kubectl delete rc deis-${SHORT_NAME}-rc
+	kubectl delete rc deis-${SHORT_NAME}-rc
 
 kube-mc:
-	kubectl create -f manifests/deis-mc-pod.yaml
+	${ENVTPL_PREFIX} -e POD_NAMESPACE=${NAMESPACE} -e POD_IMAGE=${MC_IMAGE} ${ENVTPL_IMAGE} envtpl -in=${MC_POD} | kubectl create -f -
 
 kube-mc-integration:
-	kubectl create -f manifests/deis-mc-integration-pod.yaml
+	${ENVTPL_PREFIX} -e POD_NAMESPACE=${NAMESPACE} -e POD_IMAGE=${MC_INTEGRATION_IMAGE} envtpl -in=${MC_INTEGRATION_POD} | kubectl create -f -
 
 # build the minio server
 build-server:
