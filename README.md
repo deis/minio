@@ -15,7 +15,7 @@ This Deis component is currently in beta status, and we welcome your input! If y
 
 # About
 
-The Deis minio component provides a [Minio](http://minio.io) server that can be run on Kubernetes. It's intended for use within the [Deis v2 platform](http://docs-v2.readthedocs.org/en/latest/) as an object storage server, but it's flexible enough to be run as a standalone pod on any Kubernetes cluster.
+The Deis minio component provides an [S3 API][s3-api] compatible object storage server, based on [Minio](http://minio.io), that can be run on Kubernetes. It's intended for use within the [Deis v2 platform](http://docs-v2.readthedocs.org/en/latest/) as an object storage server, but it's flexible enough to be run as a standalone pod on any Kubernetes cluster.
 
 Currently, we aren't providing this component with any kind of persistent storage, but it may work with [persistent volumes](http://kubernetes.io/docs/user-guide/volumes/).
 
@@ -72,5 +72,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 
 [install-k8s]: http://kubernetes.io/gettingstarted/
+[s3-api]: http://docs.aws.amazon.com/AmazonS3/latest/API/APIRest.html
 [issues]: https://github.com/deis/minio/issues
 [prs]: https://github.com/deis/minio/pulls
