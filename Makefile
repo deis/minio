@@ -9,7 +9,6 @@ DEV_ENV_WORK_DIR := /go/src/${REPO_PATH}
 DEV_ENV_PREFIX := docker run --rm -v ${CURDIR}:${DEV_ENV_WORK_DIR} -w ${DEV_ENV_WORK_DIR}
 DEV_ENV_CMD := ${DEV_ENV_PREFIX} ${DEV_ENV_IMAGE}
 
-VERSION ?= git-$(shell git rev-parse --short HEAD)
 LDFLAGS := "-s -X main.version=${VERSION}"
 BINDIR := ./rootfs/bin
 DEV_REGISTRY ?= $(docker-machine ip deis):5000
@@ -17,13 +16,14 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
 IMAGE_PREFIX ?= deis
 
+include versioning.mk
+
 RC := manifests/deis-${SHORT_NAME}-rc.yaml
 SVC := manifests/deis-${SHORT_NAME}-service.yaml
 ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
 USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
 # note that we are not running minio with ssl turned on. this variable is commented
 # SSL_SEC := manifests/deis-${SHORT_NAME}-secretssl-final.yaml
-IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/${SHORT_NAME}:${VERSION}
 MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
 MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
 
@@ -51,12 +51,11 @@ docker-build: build-server
 
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
+	docker tag -f ${IMAGE} ${MUTABLE_IMAGE}
 	# These are both YAML specific
 	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/${SHORT_NAME}:[0-9a-z-.]+|image: ${IMAGE}|g" ${RC}
 	perl -pi -e "s|release: [a-zA-Z0-9.+_-]+|release: ${VERSION}|g" ${RC}
 
-docker-push:
-	docker push ${IMAGE}
 
 deploy: build docker-build docker-push kube-rc
 
