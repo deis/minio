@@ -12,11 +12,11 @@ import:
 - package: gopkg.in/tomb.v1
   version: dd632973f1e7218eb1089048e0798ec9ae7dceb8
 - package: gopkg.in/v2/yaml
-  version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
 - package: gopkg.in/yaml.v2
-  version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
 - package: github.com/deis/pkg
-  version: f63d9718b86f17c9320f838fb3eb6039cadb9691
+  version: v0.4.0
   subpackages:
   - /aboutme
   - /utils
