@@ -99,9 +99,9 @@ func run(cmd string) error {
 }
 
 func readSecrets() (string, string) {
-	keyID, err := ioutil.ReadFile("/var/run/secrets/deis/minio/user/access-key-id")
+	keyID, err := ioutil.ReadFile("/var/run/secrets/deis/minio/user/accesskey")
 	checkError(err)
-	accessKey, err := ioutil.ReadFile("/var/run/secrets/deis/minio/user/access-secret-key")
+	accessKey, err := ioutil.ReadFile("/var/run/secrets/deis/minio/user/secretkey")
 	checkError(err)
 	return strings.TrimSpace(string(keyID)), strings.TrimSpace(string(accessKey))
 }

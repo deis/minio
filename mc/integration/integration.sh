@@ -20,8 +20,8 @@
 
 
 SECRET_PREFIX="/var/run/secrets/deis/minio/user"
-ACCESS_KEY_FILE="$SECRET_PREFIX/access-key-id"
-ACCESS_SECRET_FILE="$SECRET_PREFIX/access-secret-key"
+ACCESS_KEY_FILE="$SECRET_PREFIX/accesskey"
+ACCESS_SECRET_FILE="$SECRET_PREFIX/secretkey"
 
 if [ -z "$DEIS_MINIO_SERVICE_HOST" ]; then
   echo "ERROR: no DEIS_MINIO_SERVICE_HOST env var "
