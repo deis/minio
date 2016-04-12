@@ -14,7 +14,7 @@ imports:
   subpackages:
   - spew
 - name: github.com/deis/pkg
-  version: 20cd6d3875d29b186b47d7466dcc1672db01619c
+  version: f63d9718b86f17c9320f838fb3eb6039cadb9691
   subpackages:
   - aboutme
   - utils
