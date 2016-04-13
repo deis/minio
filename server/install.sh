@@ -15,5 +15,7 @@ cd $GOPATH/src/github.com/minio
 git clone -b master --single-branch https://github.com/minio/minio.git minio
 cd minio
 git reset --hard 356b889
+# HACK remove the "go vet" installation line
+sed -i.bak '63 d' Makefile
 make install
 cp $GOPATH/bin/minio /pwd/minio

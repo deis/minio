@@ -40,7 +40,7 @@ const configdir = "/home/minio/.minio/"
 const templv3 = `{
 	"version": "3",
 	"alias": {
-		"dl": "https://dl.minio.io:9000",
+		"dl": "https://dl.minio.io",
 		"localhost": "http://localhost:9000",
 		"play": "https://play.minio.io:9000",
 		"s3": "https://s3.amazonaws.com"
