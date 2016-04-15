@@ -1,3 +1,18 @@
+### v2.0.0-beta1 -> v2.0.0-beta2
+
+#### Features
+
+ - [`98c3647`](https://github.com/deis/minio/commit/98c364764bc058fd3ad018b7799e0cc6e2a7d268) _scripts: add CHANGELOG.md and generator script
+
+#### Fixes
+
+ - [`0c71217`](https://github.com/deis/minio/commit/0c712173fead2785ee99fdba98830772819d71ee) (all): resolve build and container start issues
+
+
+#### Maintenance
+
+ - [`e7f7ca1`](https://github.com/deis/minio/commit/e7f7ca102b4b8944ceb7c4de61d95c07e2a142ad) Makefile: update to go-dev:0.9.1
+
 ### 2.0.0-alpha -> v2.0.0-beta1
 
 #### Features
