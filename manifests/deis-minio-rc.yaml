@@ -42,8 +42,8 @@ spec:
             # not running with ssl yet
             # - "--cert=/var/run/secrets/deis/minio/ssl/access-cert"
             # - "--key=/var/run/secrets/deis/minio/ssl/access-pem"
-            - "server"
-            - "/home/minio/"
+            - server
+            - /mnt/minio/data
           volumeMounts:
             - name: minio-admin
               mountPath: /var/run/secrets/deis/minio/admin
@@ -51,6 +51,8 @@ spec:
             - name: minio-user
               mountPath: /var/run/secrets/deis/minio/user
               readOnly: true
+            - name: minio-data
+              mountPath: /mnt/minio/data
             # - name: minio-ssl
             #   mountPath: /var/run/secrets/deis/minio/ssl
             #   readOnly: true
@@ -61,6 +63,10 @@ spec:
         - name: minio-user
           secret:
             secretName: minio-user
+        - name: minio-data
+          persistentVolumeClaim:
+            claimName: deis-minio-data
+
         # - name: minio-ssl
         #   secret:
         #     secretName: minio-ssl
