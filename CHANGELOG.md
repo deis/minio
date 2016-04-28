@@ -1,3 +1,9 @@
+### v2.0.0-beta2 -> v2.0.0-beta3
+
+#### Maintenance
+
+ - [`ab4e628`](https://github.com/deis/minio/commit/ab4e62874733d68a946c83fb751e7958fb6e2a54) .travis.yml: Deep six the travis -> jenkins webhooks
+
 ### v2.0.0-beta1 -> v2.0.0-beta2
 
 #### Features
