@@ -1,3 +1,13 @@
+### v2.0.0-beta3 -> v2.0.0-beta4
+
+#### Features
+
+ - [`a89d78e`](https://github.com/deis/minio/commit/a89d78e0a9da142512b81e7ad6e31f9596d4cb6e) secret: use objectstorage secret for creds than minio user secret
+
+#### Documentation
+
+ - [`5f2cab2`](https://github.com/deis/minio/commit/5f2cab2eaeed8de2272577edb12a60d1b34454a8) CHANGELOG.md: update for v2.0.0-beta3
+
 ### v2.0.0-beta2 -> v2.0.0-beta3
 
 #### Maintenance
