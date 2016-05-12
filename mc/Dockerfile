@@ -4,7 +4,7 @@ RUN apk add -U ca-certificates && rm -rf /var/cache/apk/*
 
 ADD mc /bin/mc
 
-ENV DEIS_RELEASE=2.0.0-dev
+ENV WORKFLOW_RELEASE=2.0.0-dev
 ADD ./integration/integration.sh /bin/integration.sh
 RUN chmod +x /bin/integration.sh
 
