@@ -22,3 +22,6 @@ import:
   - /utils
 - package: github.com/minio/minio-go
   version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
+- package: speter.net/go/exp/math/dec/inf
+  repo: https://github.com/belua/inf
+  vcs: git
