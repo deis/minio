@@ -1,5 +1,5 @@
-hash: 5bbac2d1624df033a6051ebdb8ddfe4089fc5176cce7cfb70be556b21031d775
-updated: 2016-03-15T19:24:20.96594444Z
+hash: 0b4a8b4cb85b3ff797dea2f5bf46086e1e8f4fb0fec40b7163323d9774261c56
+updated: 2016-05-17T17:02:19.21688493-06:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c
@@ -7,8 +7,6 @@ imports:
   version: b965b613227fddccbfffe13eae360ed3fa822f8d
   subpackages:
   - quantile
-- name: github.com/blang/semver
-  version: 31b736133b98f26d5e078ec9eb591666edfd091f
 - name: github.com/davecgh/go-spew
   version: 3e6e67c4dcea3ac2f25fd4731abc0e1deaf36216
   subpackages:
@@ -36,11 +34,6 @@ imports:
   - configs
   - cgroups
   - system
-- name: github.com/emicklei/go-restful
-  version: 1f9a0ee00ff93717a275e15b30cf7df356255877
-  subpackages:
-  - swagger
-  - log
 - name: github.com/ghodss/yaml
   version: 73d445a93680fa1a78ae23a5839bad48f32ba1ee
 - name: github.com/golang/glog
@@ -50,7 +43,7 @@ imports:
   subpackages:
   - proto
 - name: github.com/google/cadvisor
-  version: a8085bf9276c22f16dbcd7aa56f0d4d0626a0b2e
+  version: aa6f80814bc6fdb43a0ed12719658225420ffb7d
   subpackages:
   - api
   - cache/memory
@@ -109,6 +102,8 @@ imports:
   version: c2528b2dd8352441850638a8bb678c2ad056fd3e
   subpackages:
   - context
+  - html
+  - websocket
 - name: gopkg.in/natefinch/lumberjack.v2
   version: 600ceb4523e5b7ff745f91083c8a023c2bf73af5
 - name: gopkg.in/olivere/elastic.v2
@@ -120,8 +115,9 @@ imports:
 - name: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
 - name: k8s.io/kubernetes
-  version: 596055084fbaef446983b14097f832f60ae57634
+  version: 92635e23dfafb2ddc828c8ac6c03c7a7205a84d8
   subpackages:
+  - pkg
   - pkg/api
   - pkg/client/unversioned
   - pkg/labels
@@ -140,7 +136,6 @@ imports:
   - pkg/api/errors
   - pkg/api/install
   - pkg/api/latest
-  - pkg/api/validation
   - pkg/apis/extensions
   - pkg/apis/extensions/install
   - pkg/client/metrics
@@ -160,9 +155,10 @@ imports:
   - pkg/api/registered
   - pkg/api/util
   - pkg/api/v1
-  - pkg/capabilities
   - pkg/apis/extensions/v1beta1
   - pkg/client/unversioned/clientcmd/api/v1
 - name: speter.net/go/exp/math/dec/inf
   version: 42ca6cd68aa922bc3f32f1e056e61b65945d9ad7
+  repo: https://github.com/belua/inf
+  vcs: git
 devImports: []
