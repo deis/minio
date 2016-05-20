@@ -18,12 +18,6 @@ IMAGE_PREFIX ?= deis
 
 include versioning.mk
 
-RC := manifests/deis-${SHORT_NAME}-rc.yaml
-SVC := manifests/deis-${SHORT_NAME}-service.yaml
-ADMIN_SEC := manifests/deis-${SHORT_NAME}-secretAdmin.yaml
-USER_SEC := manifests/deis-${SHORT_NAME}-secretUser.yaml
-# note that we are not running minio with ssl turned on. this variable is commented
-# SSL_SEC := manifests/deis-${SHORT_NAME}-secretssl-final.yaml
 MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
 MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
 
@@ -52,50 +46,9 @@ docker-build: build build-server
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
 	docker tag -f ${IMAGE} ${MUTABLE_IMAGE}
-	# These are both YAML specific
-	perl -pi -e "s|image: [a-z0-9.:]+\/deis\/${SHORT_NAME}:[0-9a-z-.]+|image: ${IMAGE}|g" ${RC}
-	perl -pi -e "s|release: [a-zA-Z0-9.+_-]+|release: ${VERSION}|g" ${RC}
 
 
 deploy: build docker-build docker-push kube-rc
-
-# TODO: would be nice to refactor all of this code into a single binary. 1/2 of it is already written in genssl/manifest_replace.go.
-# the other 1/2 is in gen.sh, and should be refactored as a few 'exec.Command' calls...
-#
-# NOTE: that we are not currently running the minio server with ssl turned on. this target is currently not used
-ssl-cert:
-	# generate ssl certs
-	docker run --rm -v "${CURDIR}":/pwd -w /pwd centurylink/openssl:0.0.1 ./genssl/gen.sh
-	# replace values in ssl secrets file
-	docker run --rm -v "${CURDIR}":/pwd -w /pwd golang:1.5.1-alpine go run ./genssl/manifest_replace.go --cert=./genssl/server.cert --key=./genssl/server.key --tpl=./manifests/deis-minio-secretssl-tpl.yaml --out=./manifests/deis-minio-secretssl-final.yaml
-
-kube-rc:
-	kubectl create -f ${RC}
-
-# note that we are not running minio with ssl turned on. the ssl related dependency and commands are commented out in this target
-kube-secrets: #ssl-cert
-	kubectl create -f ${ADMIN_SEC}
-	kubectl create -f ${USER_SEC}
-	# kubectl create -f ${SSL_SEC}
-
-# note that we are not running minio with ssl turned on. the ssl related dependency and commands are commented out in this target
-kube-clean-secrets:
-	kubectl delete secret minio-user
-	kubectl delete secret minio-admin
-	# kubectl delete secret minio-ssl
-
-kube-service: kube-secrets
-	- kubectl create -f ${SVC}
-	- kubectl create -f manifests/deis-minio-secretUser.yaml
-
-kube-clean:
-	- kubectl delete rc deis-${SHORT_NAME}-rc
-
-kube-mc:
-	kubectl create -f manifests/deis-mc-pod.yaml
-
-kube-mc-integration:
-	kubectl create -f manifests/deis-mc-integration-pod.yaml
 
 # build the minio server
 build-server:
