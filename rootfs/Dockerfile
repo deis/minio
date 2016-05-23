@@ -13,7 +13,7 @@ RUN curl -f -SL https://dl.minio.io/client/mc/release/linux-amd64/archive/mc.OFF
 	&& chmod 755 /usr/bin/mc \
 	&& mkdir /home/minio/.minio \
 	&& chown minio:minio /home/minio/.minio \
-	&& curl https://dl.minio.io/server/minio/release/linux-amd64/minio > /bin/minio
+	&& curl https://dl.minio.io/server/minio/release/linux-amd64/minio > /bin/minio \
 	&& chmod 755 bin/minio
 
 USER minio
