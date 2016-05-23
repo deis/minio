@@ -39,7 +39,7 @@ glideup:
 
 build:
 	mkdir -p ${BINDIR}
-	${DEV_ENV_PREFIX} -e CGO_ENABLED=0 ${DEV_ENV_IMAGE} go build -a -installsuffix cgo -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
+	${DEV_ENV_CMD} go build -ldflags '-s' -o $(BINDIR)/boot boot.go || exit 1
 
 test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
