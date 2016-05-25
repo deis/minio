@@ -18,9 +18,6 @@ IMAGE_PREFIX ?= deis
 
 include versioning.mk
 
-MC_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc:${VERSION}
-MC_INTEGRATION_IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/mc-integration:${VERSION}
-
 TEST_PACKAGES := $(shell ${DEV_ENV_CMD} glide nv)
 
 all: build docker-build docker-push
@@ -48,27 +45,10 @@ docker-build: build build-server
 	docker tag -f ${IMAGE} ${MUTABLE_IMAGE}
 
 
-deploy: build docker-build docker-push kube-rc
+deploy: build docker-build docker-push
 
 # build the minio server
 build-server:
 	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.6 ./install.sh
 
-mc-build:
-	make -C mc build
-
-mc-docker-build:
-	make -C mc docker-build
-
-mc-docker-push:
-	make -C mc docker-push
-
-# targets for the mc integration tests
-
-mc-integration-docker-build:
-	make -C mc/integration docker-build
-
-mc-integration-docker-push:
-	make -C mc/integration docker-push
-
-.PHONY: all build docker-compile kube-up kube-down deploy mc kube-mc
+.PHONY: all bootstrap glideup build test docker-build deploy build-server
