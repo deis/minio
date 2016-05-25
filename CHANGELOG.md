@@ -1,3 +1,14 @@
+### v2.0.0-beta4 -> v2.0.0-rc1
+
+#### Fixes
+
+ - [`dcca9e0`](https://github.com/deis/minio/commit/dcca9e05bbbb997c969d1deb5d9e643f6f39217a) glide: add alias for speter.net/go/exp/math/dec/inf
+
+#### Maintenance
+
+ - [`15242fd`](https://github.com/deis/minio/commit/15242fdb9cb8655769154d3b8c55a297e113b6a7) Dockerfile: Refactor image to use ubuntu-slim
+ - [`7b288c0`](https://github.com/deis/minio/commit/7b288c050e3e95040e62cafb3ba63770e958db1e) rootfs,mc/Dockerfile: DEIS_RELEASE -> WORKFLOW_RELEASE
+
 ### v2.0.0-beta3 -> v2.0.0-beta4
 
 #### Features
