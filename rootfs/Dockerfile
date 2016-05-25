@@ -12,7 +12,9 @@ COPY . /
 RUN curl -f -SL https://dl.minio.io/client/mc/release/linux-amd64/archive/mc.OFFICIAL.2015-09-05T23-43-46Z -o /usr/bin/mc \
 	&& chmod 755 /usr/bin/mc \
 	&& mkdir /home/minio/.minio \
-	&& chown minio:minio /home/minio/.minio
+	&& chown minio:minio /home/minio/.minio \
+	&& curl https://dl.minio.io/server/minio/release/linux-amd64/minio.RELEASE.2016-04-17T22-09-24Z > /bin/minio \
+	&& chmod 755 bin/minio
 
 USER minio
 
