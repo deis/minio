@@ -1,10 +1,3 @@
 rootfs/bin/minio
 rootfs/bin/boot
 vendor/
-genssl/server.cert
-genssl/server.csr
-genssl/server.key
-genssl/server.pem
-manifests/deis-minio-secretssl-final.yaml
-mc/mc
-server/minio

@@ -44,8 +44,4 @@ docker-build: build
 
 deploy: build docker-build docker-push
 
-# build the minio server
-build-server:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.6 ./install.sh
-
 .PHONY: all bootstrap glideup build test docker-build deploy build-server
