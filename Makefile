@@ -35,10 +35,7 @@ build:
 test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
 
-docker-build: build build-server
-	# copy the server binary from where it was built to the final image's file system.
-	# note that the minio server is built as a dependency of this build target.
-	cp server/minio ${BINDIR}
+docker-build: build
 
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs

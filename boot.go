@@ -34,6 +34,7 @@ type Secret struct {
 	Host      string
 	KeyID     string
 	AccessKey string
+	Region    string
 }
 
 const configdir = "/home/minio/.minio/"
@@ -65,7 +66,8 @@ const templv2 = `{
 	"credentials": {
   {{range .}}
 		"accessKeyId": "{{.KeyID}}",
-		"secretAccessKey": "{{.AccessKey}}"
+		"secretAccessKey": "{{.AccessKey}}",
+		"region": "{{.Region}}"
   {{end}}
 	},
 	"mongoLogger": {
@@ -139,6 +141,7 @@ func main() {
 			Host:      pod.IP,
 			KeyID:     key,
 			AccessKey: access,
+			Region:    "us-east-1",
 		},
 	}
 	t := template.New("MinioTpl")
