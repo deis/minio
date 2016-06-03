@@ -35,10 +35,7 @@ build:
 test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
 
-docker-build: build build-server
-	# copy the server binary from where it was built to the final image's file system.
-	# note that the minio server is built as a dependency of this build target.
-	cp server/minio ${BINDIR}
+docker-build: build
 
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
@@ -46,9 +43,5 @@ docker-build: build build-server
 
 
 deploy: build docker-build docker-push
-
-# build the minio server
-build-server:
-	docker run -e GO15VENDOREXPERIMENT=1 -e GOROOT=/usr/local/go --rm -v "${CURDIR}/server":/pwd -w /pwd golang:1.6 ./install.sh
 
 .PHONY: all bootstrap glideup build test docker-build deploy build-server
