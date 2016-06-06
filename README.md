@@ -8,9 +8,7 @@ Deis (pronounced DAY-iss) Workflow is an open source Platform as a Service (PaaS
 
 For more information about the Deis workflow, please visit the main project page at https://github.com/deis/workflow.
 
-## Beta Status
-
-This Deis component is currently in beta status, and we welcome your input! If you have feedback, please submit an [issue][issues]. If you'd like to participate in development, please read the "Development" section below and submit a [pull request][prs].
+We welcome your input! If you have feedback, please submit an [issue][issues]. If you'd like to participate in development, please read the "Development" section below and submit a [pull request][prs].
 
 # About
 
