@@ -13,7 +13,7 @@ RUN curl -f -SL https://dl.minio.io/client/mc/release/linux-amd64/archive/mc.OFF
 	&& chmod 755 /usr/bin/mc \
 	&& mkdir /home/minio/.minio \
 	&& chown minio:minio /home/minio/.minio
-ADD https://dl.minio.io/server/minio/release/linux-amd64/minio.RELEASE.2016-06-03T19-32-05Z /bin/minio
+ADD https://storage.googleapis.com/minio-mirror/linux-amd64/minio-2016-06-03T19-32-05Z /bin/minio
 RUN chmod 755 /bin/minio
 
 USER minio
