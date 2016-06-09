@@ -44,4 +44,4 @@ docker-build: build
 
 deploy: build docker-build docker-push
 
-.PHONY: all bootstrap glideup build test docker-build deploy build-server
+.PHONY: all bootstrap glideup build test docker-build deploy
