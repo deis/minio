@@ -1,3 +1,9 @@
+### v2.0.0-rc2 -> v2.0.0
+
+#### Maintenance
+
+- [`c3afeb8`](https://github.com/deis/minio/commit/c3afeb8d507bc8cef82cac6b2816d443983465fd) README.md: remove beta status
+
 ### v2.0.0-rc1 -> v2.0.0-rc2
 
 ### v2.0.0-beta4 -> v2.0.0-rc1
