@@ -19,5 +19,3 @@ RUN chmod 755 /bin/minio
 USER minio
 
 CMD ["/bin/boot"]
-
-ENV WORKFLOW_RELEASE=2.0.0
