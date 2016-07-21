@@ -1,3 +1,19 @@
+### v2.0.0 -> v2.2.0
+
+#### Fixes
+
+- [`6ae5779`](https://github.com/deis/minio/commit/6ae577905f5f9c0ff0d27e1621357b7b1db208e5) Dockerfile: download minio from a mirror (#110)
+
+#### Documentation
+
+- [`31e054d`](https://github.com/deis/minio/commit/31e054df00fa1ea25be8d7e5f7e47280c63da72e) CHANGELOG.md: add entry for v2.0.0-rc2
+- [`958ccd7`](https://github.com/deis/minio/commit/958ccd7af60354e6263278ba6f592a5449e25ed8) CHANGELOG.md: add entry for v2.0.0
+
+#### Maintenance
+
+- [`52c97ad`](https://github.com/deis/minio/commit/52c97ad1205a11de084d412e77889e9e49f5534c) README.md: remove beta status
+- [`073d93c`](https://github.com/deis/minio/commit/073d93c825d22b65f3b139aad17a3ed69ecfa5a5) Dockerfile: Remove WORKFLOW_RELEASE env var
+
 ### v2.0.0-rc2 -> v2.0.0
 
 #### Maintenance
