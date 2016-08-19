@@ -11,4 +11,4 @@ sudo: required
 install:
   - make bootstrap
 script:
-  - make test build docker-build
+  - DEIS_REGISTRY='' make test build docker-build

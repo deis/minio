@@ -36,11 +36,9 @@ test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
 
 docker-build: build
-
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
-
 
 deploy: build docker-build docker-push
 
