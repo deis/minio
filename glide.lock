@@ -1,8 +1,8 @@
-hash: 0b4a8b4cb85b3ff797dea2f5bf46086e1e8f4fb0fec40b7163323d9774261c56
-updated: 2016-05-17T17:02:19.21688493-06:00
+hash: f902fde775a8af12873fce1f36904568202cece5c068c8f4dce22f233a20c8f8
+updated: 2016-08-19T21:57:38.311813599Z
 imports:
 - name: bitbucket.org/ww/goautoneg
-  version: 75cd24fc2f2c
+  version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
 - name: github.com/beorn7/perks
   version: b965b613227fddccbfffe13eae360ed3fa822f8d
   subpackages:
@@ -161,4 +161,4 @@ imports:
   version: 42ca6cd68aa922bc3f32f1e056e61b65945d9ad7
   repo: https://github.com/belua/inf
   vcs: git
-devImports: []
+testImports: []
