@@ -1,10 +1,8 @@
 SHORT_NAME := minio
 
-export GO15VENDOREXPERIMENT=1
-
 # dockerized development environment variables
 REPO_PATH := github.com/deis/${SHORT_NAME}
-DEV_ENV_IMAGE := quay.io/deis/go-dev:0.9.1
+DEV_ENV_IMAGE := quay.io/deis/go-dev:0.17.0
 DEV_ENV_WORK_DIR := /go/src/${REPO_PATH}
 DEV_ENV_PREFIX := docker run --rm -v ${CURDIR}:${DEV_ENV_WORK_DIR} -w ${DEV_ENV_WORK_DIR}
 DEV_ENV_CMD := ${DEV_ENV_PREFIX} ${DEV_ENV_IMAGE}
@@ -36,11 +34,9 @@ test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
 
 docker-build: build
-
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
-
 
 deploy: build docker-build docker-push
 
