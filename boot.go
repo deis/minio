@@ -13,7 +13,6 @@ import (
 	"text/template"
 
 	"github.com/deis/minio/src/healthsrv"
-	"github.com/deis/pkg/aboutme"
 	"github.com/deis/pkg/utils"
 	minio "github.com/minio/minio-go"
 )
@@ -118,8 +117,6 @@ func newMinioClient(host, port, accessKey, accessSecret string, insecure bool) (
 }
 
 func main() {
-	pod, err := aboutme.FromEnv()
-	checkError(err)
 	key, access := readSecrets()
 
 	minioHost := os.Getenv("MINIO_HOST")
@@ -138,7 +135,7 @@ func main() {
 
 	secrets := []Secret{
 		{
-			Host:      pod.IP,
+			Host:      os.Getenv("POD_IP"),
 			KeyID:     key,
 			AccessKey: access,
 			Region:    "us-east-1",
