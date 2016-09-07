@@ -16,9 +16,8 @@ import:
 - package: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
 - package: github.com/deis/pkg
-  version: f63d9718b86f17c9320f838fb3eb6039cadb9691
+  version: 189ed6bd6b6aa6629b72c2c5472095e176eec8a6
   subpackages:
-  - /aboutme
   - /utils
 - package: github.com/minio/minio-go
   version: c5884ce9ce3ac73b025d0bc58c4d3d72870edc0b
