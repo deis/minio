@@ -37,28 +37,6 @@ type Secret struct {
 }
 
 const configdir = "/home/minio/.minio/"
-const templv3 = `{
-	"version": "3",
-	"alias": {
-		"dl": "https://dl.minio.io",
-		"localhost": "http://localhost:9000",
-		"play": "https://play.minio.io:9000",
-		"s3": "https://s3.amazonaws.com"
-	},
-  "hosts": {
-  {{range .}}
-		"{{.Host}}": {
-			"access-key-id": "{{.KeyID}}" ,
-			"secret-access-key": "{{.AccessKey}}"
-		},
-    {{end}}
-		"127.0.0.1:*": {
-			"access-key-id": "",
-			"secret-access-key": ""
-		}
-	}
-}
-`
 
 const templv2 = `{
 	"version": "2",
@@ -135,7 +113,6 @@ func main() {
 
 	secrets := []Secret{
 		{
-			Host:      os.Getenv("POD_IP"),
 			KeyID:     key,
 			AccessKey: access,
 			Region:    "us-east-1",
