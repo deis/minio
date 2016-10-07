@@ -1,0 +1,14 @@
+{{- if eq .Values.global.storage "minio" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: deis-minio
+  labels:
+    heritage: deis
+spec:
+  ports:
+    - name: s3
+      port: 9000
+  selector:
+    app: deis-minio
+{{- end }}
