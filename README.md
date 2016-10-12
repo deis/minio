@@ -12,7 +12,7 @@ We welcome your input! If you have feedback, please submit an [issue][issues]. I
 
 # About
 
-The Deis minio component provides an [S3 API][s3-api] compatible object storage server, based on [Minio](http://minio.io), that can be run on Kubernetes. It's intended for use within the [Deis v2 platform](http://docs-v2.readthedocs.org/en/latest/) as an object storage server, but it's flexible enough to be run as a standalone pod on any Kubernetes cluster.
+The Deis minio component provides an [S3 API][s3-api] compatible object storage server, based on [Minio](http://minio.io), that can be run on Kubernetes. It's intended for use within the [Deis v2 platform][deis-docs] as an object storage server, but it's flexible enough to be run as a standalone pod on any Kubernetes cluster.
 
 Note that in the default [Helm chart for the Deis platform](https://github.com/deis/charts/tree/master/deis-dev), this component is used as a storage location for the following components:
 
@@ -69,7 +69,7 @@ Please see [README.md](https://github.com/deis/workflow-e2e/blob/master/README.m
 
 ## Dogfooding
 
-Please follow the instructions on the [official Deis docs](http://docs-v2.readthedocs.org/en/latest/installing-workflow/installing-deis-workflow/) to install and configure your Deis cluster and all related tools, and deploy and configure an app on Deis.
+Please follow the instructions on the [official Deis docs][deis-docs] to install and configure your Deis cluster and all related tools, and deploy and configure an app on Deis.
 
 ## License
 
@@ -84,3 +84,4 @@ Unless required by applicable law or agreed to in writing, software distributed 
 [s3-api]: http://docs.aws.amazon.com/AmazonS3/latest/API/APIRest.html
 [issues]: https://github.com/deis/minio/issues
 [prs]: https://github.com/deis/minio/pulls
+[deis-docs]: https://deis.com/docs/workflow
