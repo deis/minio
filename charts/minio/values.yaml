@@ -1,0 +1,5 @@
+org: "deisci"
+pull_policy: "Always"
+docker_tag: canary
+global:
+  storage: minio
