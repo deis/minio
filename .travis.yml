@@ -11,6 +11,6 @@ sudo: required
 install:
   - make bootstrap
 script:
-  - DEIS_REGISTRY='' make test build docker-build
+  - DEIS_REGISTRY='' make test-cover build docker-build
 after_success:
   - bash <(curl -s https://codecov.io/bash)
