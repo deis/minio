@@ -1,3 +1,4 @@
 rootfs/bin/minio
 rootfs/bin/boot
 vendor/
+coverage.txt

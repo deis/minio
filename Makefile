@@ -33,6 +33,9 @@ build:
 test:
 	${DEV_ENV_CMD} go test ${TEST_PACKAGES}
 
+test-cover:
+	${DEV_ENV_CMD} test-cover.sh
+
 docker-build: build
 	# build the main image
 	docker build --rm -t ${IMAGE} rootfs
