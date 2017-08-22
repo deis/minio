@@ -1,3 +1,9 @@
+
+|![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png) | Deis Workflow will soon no longer be maintained.<br />Please [read the announcement](https://deis.com/blog/2017/deis-workflow-final-release/) for more detail. |
+|---:|---|
+| 09/07/2017 | Deis Workflow [v2.18][] final release before entering maintenance mode |
+| 03/01/2018 | End of Workflow maintenance: critical patches no longer merged |
+
 # Deis Minio v2
 
 [![Build Status](https://ci.deis.io/job/minio/badge/icon)](https://ci.deis.io/job/minio)
@@ -77,3 +83,4 @@ Please follow the instructions on the [official Deis docs][deis-docs] to install
 [issues]: https://github.com/deis/minio/issues
 [prs]: https://github.com/deis/minio/pulls
 [deis-docs]: https://deis.com/docs/workflow
+[v2.18]: https://github.com/deis/workflow/releases/tag/v2.18.0
